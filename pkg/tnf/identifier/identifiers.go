@@ -58,7 +58,8 @@ const (
 	shutdownIdentifierURL                 = "http://test-network-function.com/tests/shutdown"
 	scalingIdentifierURL                  = "http://test-network-function.com/tests/scaling"
 	csiDriverIdentifierURL                = "http://test-network-function.com/tests/csiDriver"
-	versionOne                            = "v1.0.0"
+
+	VersionOne = "v1.0.0"
 )
 
 const (
@@ -601,234 +602,234 @@ var Catalog = map[string]TestCatalogEntry{
 // HostnameIdentifier is the Identifier used to represent the generic hostname test case.
 var HostnameIdentifier = Identifier{
 	URL:             hostnameIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // IPAddrIdentifier is the Identifier used to represent the generic IP Addr test case.
 var IPAddrIdentifier = Identifier{
 	URL:             ipAddrIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // NodesIdentifier is the Identifier used to represent the nodes test case.
 var NodesIdentifier = Identifier{
 	URL:             nodesIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // OperatorIdentifier is the Identifier used to represent the operator-specific test suite.
 var OperatorIdentifier = Identifier{
 	URL:             operatorIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // PingIdentifier is the Identifier used to represent the generic Ping test.
 var PingIdentifier = Identifier{
 	URL:             pingIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // PodIdentifier is the Identifier used to represent the container-specific test suite.
 var PodIdentifier = Identifier{
 	URL:             podIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // VersionIdentifier is the Identifier used to represent the generic container base image test.
 var VersionIdentifier = Identifier{
 	URL:             versionIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // CnfFsDiffIdentifier is the Identifier used to represent the generic cnf_fs_diff test.
 var CnfFsDiffIdentifier = Identifier{
 	URL:             cnfFsDiffURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // ContainerIDIdentifier is the Identifier used to represent the generic cnf_fs_diff test.
 var ContainerIDIdentifier = Identifier{
 	URL:             containerIDURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // ServiceAccountIdentifier is the Identifier used to represent the generic serviceAccount test.
 var ServiceAccountIdentifier = Identifier{
 	URL:             serviceAccountIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // RoleBindingIdentifier is the Identifier used to represent the generic roleBinding test.
 var RoleBindingIdentifier = Identifier{
 	URL:             roleBindingIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // ClusterRoleBindingIdentifier is the Identifier used to represent the generic clusterRoleBinding test.
 var ClusterRoleBindingIdentifier = Identifier{
 	URL:             clusterRoleBindingIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // NodePortIdentifier is the Identifier used to represent the generic NodePort test.
 var NodePortIdentifier = Identifier{
 	URL:             nodePortIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // NodeNamesIdentifier is the Identifier used to represent the generic NodeNames test.
 var NodeNamesIdentifier = Identifier{
 	URL:             nodeNamesIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // NodeTaintedIdentifier is the Identifier used to represent the generic NodeTainted test.
 var NodeTaintedIdentifier = Identifier{
 	URL:             nodeTaintedIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // GracePeriodIdentifier is the Identifier used to represent the generic GracePeriod test.
 var GracePeriodIdentifier = Identifier{
 	URL:             gracePeriodIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // HugepagesIdentifier is the Identifier used to represent the generic Hugepages test.
 var HugepagesIdentifier = Identifier{
 	URL:             hugepagesIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // NodeHugepagesIdentifier is the Identifier used to represent the generic NodeHugepages test.
 var NodeHugepagesIdentifier = Identifier{
 	URL:             nodehugepagesIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // DeploymentsIdentifier is the Identifier used to represent the generic Deployments test.
 var DeploymentsIdentifier = Identifier{
 	URL:             deploymentsIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // DeploymentsNodesIdentifier is the Identifier used to represent the generic DeploymentsNodes test.
 var DeploymentsNodesIdentifier = Identifier{
 	URL:             deploymentsnodesIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // DeploymentsDrainIdentifier is the Identifier used to represent the generic DeploymentsDrain test.
 var DeploymentsDrainIdentifier = Identifier{
 	URL:             deploymentsdrainIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // OwnersIdentifier is the Identifier used to represent the generic Owners test.
 var OwnersIdentifier = Identifier{
 	URL:             ownersIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // NodeSelectorIdentifier is the Identifier used to represent the generic NodeSelector test.
 var NodeSelectorIdentifier = Identifier{
 	URL:             nodehugepagesIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // PodNodeNameIdentifier is the Identifier used to represent the generic PodNodeName test.
 var PodNodeNameIdentifier = Identifier{
 	URL:             podnodenameIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // NodeMcNameIdentifier is the Identifier used to represent the generic NodeMcName test.
 var NodeMcNameIdentifier = Identifier{
 	URL:             nodemcnameIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // McKernelArgumentsIdentifier is the Identifier used to represent the generic McKernelArguments test.
 var McKernelArgumentsIdentifier = Identifier{
 	URL:             mckernelargumentsIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // CurrentKernelCmdlineArgsURLIdentifier is the Identifier used to represent the generic getCurrentKernelCmdlineArgs test.
 var CurrentKernelCmdlineArgsURLIdentifier = Identifier{
 	URL:             currentKernelCmdlineArgsIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // GrubKernelCmdlineArgsURLIdentifier is the Identifier used to represent the generic getCurrentKernelCmdlineArgs test.
 var GrubKernelCmdlineArgsURLIdentifier = Identifier{
 	URL:             grubKernelCmdlineArgsIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // SysctlConfigFilesListURLIdentifier is the Identifier used to represent the generic getCurrentKernelCmdlineArgs test.
 var SysctlConfigFilesListURLIdentifier = Identifier{
 	URL:             sysctlConfigFilesListIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // ReadRemoteFileURLIdentifier is the Identifier used to represent the generic getCurrentKernelCmdlineArgs test.
 var ReadRemoteFileURLIdentifier = Identifier{
 	URL:             readRemoteFileIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // UncordonNodeURLIdentifier is the Identifier used to represent a test that uncordons a node.
 var UncordonNodeURLIdentifier = Identifier{
 	URL:             uncordonNodeIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // CheckSubscriptionURLIdentifier is the Identifier used to represent a test that checks the subscription of an operator.
 var CheckSubscriptionURLIdentifier = Identifier{
 	URL:             checkSubscriptionIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // NodeDebugIdentifier is the Identifier used to represent the generic NodeDebug test.
 var NodeDebugIdentifier = Identifier{
 	URL:             nodeDebugIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // LoggingURLIdentifier is the Identifier used to represent a test that checks if the stdout/stderr is used
 var LoggingURLIdentifier = Identifier{
 	URL:             loggingIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // PodAntiAffinityIdentifier is the Identifier used to represent the generic podAffinity test.
 var PodAntiAffinityIdentifier = Identifier{
 	URL:             podantiaffinityIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // ShutdownURLIdentifier is the Identifier used to represent a test that checks if pre-stop lifecyle is defined
 var ShutdownURLIdentifier = Identifier{
 	URL:             shutdownIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // SysctlAllConfigsArgsIdentifier is the Identifier used to represent a test that checks all args in all sysctl conf files ordered
 // in the same way as they are loaded by the os
 var SysctlAllConfigsArgsIdentifier = Identifier{
 	URL:             sysctlAllConfigsArgsURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // ScalingIdentifier is the Identifier used to represent a test that checks deployments scale in/out
 var ScalingIdentifier = Identifier{
 	URL:             scalingIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
 
 // CSIDriverIdentifier is the Identifier used to represent the CSI driver test case.
 var CSIDriverIdentifier = Identifier{
 	URL:             csiDriverIdentifierURL,
-	SemanticVersion: versionOne,
+	SemanticVersion: VersionOne,
 }
