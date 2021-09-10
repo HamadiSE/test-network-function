@@ -4,3 +4,4 @@
 
 layout: home
 ---
+This project aims to certify that a Cloud-native Network Function(CNF) is adhering to best  practices when deployed on Red Hat Open Shift Container Platform(OCP).
