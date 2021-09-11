@@ -1,0 +1,828 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Test Network Function &mdash; test-network-function v3.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> test-network-function
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Test Network Function  </a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#test-configuration">Test Configuration</a><ul>
+<li><a class="reference internal" href="#targetnamespaces">targetNameSpaces</a></li>
+<li><a class="reference internal" href="#targetpodlabels">targetPodLabels</a></li>
+<li><a class="reference internal" href="#testtarget">testTarget</a><ul>
+<li><a class="reference internal" href="#podsundertest-containersundertest">podsUnderTest / containersUnderTest</a></li>
+<li><a class="reference internal" href="#operators">operators</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testpartner">testPartner</a></li>
+<li><a class="reference internal" href="#certifiedcontainerinfo-and-certifiedoperatorinfo">certifiedcontainerinfo and certifiedoperatorinfo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#runtime-environement-variables">Runtime environement variables</a><ul>
+<li><a class="reference internal" href="#turn-off-openshift-required-tests">Turn off openshift required tests</a></li>
+<li><a class="reference internal" href="#disable-intrusive-tests">Disable intrusive tests</a></li>
+<li><a class="reference internal" href="#specifiy-the-location-of-the-partner-repo">Specifiy the location of the partner repo</a></li>
+<li><a class="reference internal" href="#specify-the-target-namespace-for-partner-pod-deployment">Specify the target namespace for partner pod deployment</a></li>
+<li><a class="reference internal" href="#specify-the-image-id-to-be-used-with-oc-debug-commands">Specify the image id to be used with oc debug commands</a></li>
+<li><a class="reference internal" href="#execute-test-suites-from-openshift-kni-cnf-feature-deploy">Execute test suites from openshift-kni/cnf-feature-deploy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-the-tests-with-in-a-prebuild-container">Running the tests with in a prebuild container</a><ul>
+<li><a class="reference internal" href="#pulling-test-image">Pulling test image</a></li>
+<li><a class="reference internal" href="#cluster-requirement">Cluster requirement</a></li>
+<li><a class="reference internal" href="#check-cluster-resources">Check cluster resources</a></li>
+<li><a class="reference internal" href="#run-the-tests">Run the tests</a></li>
+<li><a class="reference internal" href="#running-using-docker-instead-of-podman">Running using <code class="docutils literal notranslate"><span class="pre">docker</span></code> instead of <code class="docutils literal notranslate"><span class="pre">podman</span></code></a></li>
+<li><a class="reference internal" href="#building-the-container-image-locally">Building the container image locally</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-and-running-the-standalone-test-executable">Building and running the standalone test executable</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#pulling-the-code">Pulling The Code</a></li>
+<li><a class="reference internal" href="#building-the-tests">Building the Tests</a></li>
+<li><a class="reference internal" href="#testing-a-cnf">Testing a CNF</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#available-test-specs">Available Test Specs</a><ul>
+<li><a class="reference internal" href="#general-tests">General tests</a></li>
+<li><a class="reference internal" href="#cnf-specific-tests">CNF-specific tests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-output">Test Output</a><ul>
+<li><a class="reference internal" href="#claim-file">Claim File</a></li>
+<li><a class="reference internal" href="#adding-test-results-for-the-cnf-validation-test-suite-to-a-claim-file">Adding Test Results for the CNF Validation Test Suite to a Claim File</a></li>
+<li><a class="reference internal" href="#command-line-output">Command Line Output</a><ul>
+<li><a class="reference internal" href="#test-successful-output-example">Test successful output example</a></li>
+<li><a class="reference internal" href="#test-failed-output-examples">Test failed output examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#log-level">Log level</a></li>
+<li><a class="reference internal" href="#grading-tool">Grading Tool</a><ul>
+<li><a class="reference internal" href="#id1">Overview</a></li>
+<li><a class="reference internal" href="#how-to-build-and-execute">How to build and execute</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cnf-developers">CNF Developers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a><ul>
+<li><a class="reference internal" href="#issue-146-shell-output-larger-than-16kb-requires-specification-of-the-tnf-default-buffer-size-environment-variable">Issue #146:  Shell Output larger than 16KB requires specification of the TNF_DEFAULT_BUFFER_SIZE environment variable</a></li>
+<li><a class="reference internal" href="#issue-161-some-containers-under-test-do-not-contain-ping-or-ip-binary-utilities">Issue-161 Some containers under test do not contain <code class="docutils literal notranslate"><span class="pre">ping</span></code> or <code class="docutils literal notranslate"><span class="pre">ip</span></code> binary utilities</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">test-network-function</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Test Network Function  </li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="tex2jax_ignore mathjax_ignore section" id="test-network-function-build-go-report-card">
+<h1>Test Network Function <img alt="build" src="https://github.com/test-network-function/test-network-function/actions/workflows/merge.yaml/badge.svg" /> <a class="reference external" href="https://goreportcard.com/report/github.com/test-network-function/test-network-function"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/test-network-function/test-network-function" /></a><a class="headerlink" href="#test-network-function-build-go-report-card" title="Permalink to this headline">¶</a></h1>
+<p>This repository contains a set of Cloud-Native Network Functions (CNFs) test cases and the framework to build more. The tests and framework are intended
+to test the interaction of CNFs with OpenShift Container Platform.  It also generates a report
+(claim.json) after running tests.</p>
+<p>Please consult <a class="reference internal" href="CATALOG.html"><span class="doc std std-doc">CATALOG.md</span></a> for a catalog of the included test cases and test case building blocks.</p>
+<p>The suite is provided here in part so that CNF Developers can use the suite to test their CNFs readiness for
+certification.  Please see “CNF Developers” below for more information.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><img alt="overview" src="docs/images/overview.svg" /></p>
+<p>In the diagram above:</p>
+<ul class="simple">
+<li><p>the <code class="docutils literal notranslate"><span class="pre">CNF</span> <span class="pre">under</span> <span class="pre">test</span></code> is the CNF to be certified. The certification suite identifies the resources (containers/pods/operators etc) belonging to the CNF via labels or static data entries in the config file</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">Certification</span> <span class="pre">container/exec</span></code> is the certification test suite running on the platform or in a container. The executable verifies the CNF under test configuration and its interactions with openshift</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">Partner</span> <span class="pre">pod</span></code> can be any pod with the required tools in the same namespace as the <code class="docutils literal notranslate"><span class="pre">CNF</span> <span class="pre">under</span> <span class="pre">test</span></code>. For example, during connectivity tests, the partner pod will generate pings towards the <code class="docutils literal notranslate"><span class="pre">CNF</span> <span class="pre">under</span> <span class="pre">test</span></code> to verify connectivity. The partner pods/containers are auto deployed by the test suite prior a test run and can be auto discovered by the suite without any data entry in the config file.</p></li>
+</ul>
+</div>
+<div class="section" id="test-configuration">
+<h2>Test Configuration<a class="headerlink" href="#test-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The Test Network Function support autodiscovery using labels and annotations. The following sections describe how to configure the TNF via labels/annotation and the corresponding settings in the config file. A sample config file can be found <span class="xref myst">here</span>.</p>
+<div class="section" id="targetnamespaces">
+<h3>targetNameSpaces<a class="headerlink" href="#targetnamespaces" title="Permalink to this headline">¶</a></h3>
+<p>A single namespace should be specified in the <span class="xref myst">configuration file</span>. This namespace will be used by autodiscovery to find the Pods under test. To run multiple tests in different namespaces simultaneously, intrusive tests should be disabled by setting <code class="docutils literal notranslate"><span class="pre">TNF_NON_INTRUSIVE_ONLY</span></code> to true.</p>
+</div>
+<div class="section" id="targetpodlabels">
+<h3>targetPodLabels<a class="headerlink" href="#targetpodlabels" title="Permalink to this headline">¶</a></h3>
+<p>The goal of this section is to specify the label to be used to identify the CNF resources under test. It’s highly recommended that the labels should be defined in pod definition rather than added after pod is created, as labels added later on will be lost in case the pod gets rescheduled. In case of pods defined as part a deployment, it’s best to use the same label as the one defined in the <code class="docutils literal notranslate"><span class="pre">spec.selector.matchLabels</span></code> section of the deployment yaml. The prefix field can be used to avoid naming collision with other labels.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>targetPodLabels:
+  - prefix: test-network-function.com
+    name: generic
+    value: target
+</pre></div>
+</div>
+<p>The corresponding label used to match pods is:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>test-network-function.com/generic: target 
+</pre></div>
+</div>
+<p>Once the pods are found, all of their containers are also added to the target container list. A target deployments list will also be created with all the deployments which the test pods belong to.</p>
+</div>
+<div class="section" id="testtarget">
+<h3>testTarget<a class="headerlink" href="#testtarget" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="podsundertest-containersundertest">
+<h4>podsUnderTest / containersUnderTest<a class="headerlink" href="#podsundertest-containersundertest" title="Permalink to this headline">¶</a></h4>
+<p>This section is usually not required if labels defined in the section above cover all resources that should be tested. If label based discovery is not sufficient, this section can be manually populated as shown in the commented part of the <span class="xref myst">sample config</span>. However, instrusive tests need to be skipped (<a class="reference external" href="#disable-intrusive-tests">see here</a>) for a reliable test result. The pods and containers explicitly configured here are added to the target pod/container lists populated through label matching.</p>
+<p>For both configured and discovered pods/containers, the autodiscovery mechanism will attempt to identify the default network device and all the IP addresses of the pods it
+needs for network connectivity tests, though that information can be explicitly set using annotations if needed. For Pod IPs:</p>
+<ul class="simple">
+<li><p>The annotation <code class="docutils literal notranslate"><span class="pre">test-network-function.com/multusips</span></code> is the highest priority, and must contain a JSON-encoded list of
+IP addresses to be tested for the pod. This must be explicitly set.</p></li>
+<li><p>If the above is not present, the <code class="docutils literal notranslate"><span class="pre">k8s.v1.cni.cncf.io/networks-status</span></code> annotation is checked and all IPs from it are
+used. This annotation is automatically managed in OpenShift but may not be present in K8s.</p></li>
+<li><p>If neither of the above is present, then only known IPs associated with the pod are used (the pod <code class="docutils literal notranslate"><span class="pre">.status.ips</span></code> field).</p></li>
+</ul>
+<p>For Network Interfaces:</p>
+<ul class="simple">
+<li><p>The annotation <code class="docutils literal notranslate"><span class="pre">test-network-function.com/defaultnetworkinterface</span></code> is the highest priority, and must contain a
+JSON-encoded string of the primary network interface for the pod. This must be explicitly set if needed. Examples can
+be seen in <a class="reference external" href="https://github.com/test-network-function/cnf-certification-test-partner/local-test-infra/local-pod-under-test/local-partner-pod.yaml">cnf-certification-test-partner</a></p></li>
+<li><p>If the above is not present, the <code class="docutils literal notranslate"><span class="pre">k8s.v1.cni.cncf.io/networks-status</span></code> annotation is checked and the <code class="docutils literal notranslate"><span class="pre">&quot;interface&quot;</span></code> from
+the first entry found with <code class="docutils literal notranslate"><span class="pre">&quot;default&quot;=true</span></code> is used. This annotation is automatically managed in OpenShift but may not
+be present in K8s.</p></li>
+</ul>
+<p>If multus IP addresses are dicovered or configured, the partner pod needs to be deployed in the same namespace as the multus network interface for the connectivity test to pass. Refer to instruction <a class="reference external" href="#specify-the-target-namespace-for-partner-pod-deployment">here</a>.</p>
+<p>If a pod is not suitable for network connectivity tests because it lacks binaries (e.g. <code class="docutils literal notranslate"><span class="pre">ping</span></code>), it should be
+given the label <code class="docutils literal notranslate"><span class="pre">test-network-function.com/skip_connectivity_tests</span></code> to exclude it from those tests. The label value is
+not important, only its presence. Equivalent to <code class="docutils literal notranslate"><span class="pre">excludeContainersFromConnectivityTests</span></code> in the config file.</p>
+</div>
+<div class="section" id="operators">
+<h4>operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h4>
+<p>The section can be configured as well as auto discovered. For manual configuration, see the commented part of the <span class="xref myst">sample config</span>. For autodiscovery:</p>
+<ul class="simple">
+<li><p>CSVs to be tested by the <code class="docutils literal notranslate"><span class="pre">operator</span></code> spec are identified with the <code class="docutils literal notranslate"><span class="pre">test-network-function.com/operator=target</span></code>
+label. Any value is permitted but <code class="docutils literal notranslate"><span class="pre">target</span></code> is used here for consistency with the other specs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test-network-function.com/subscription_name</span></code> is optional and should contain a JSON-encoded string that’s the name of
+the subscription for this CSV. If unset, the CSV name will be used.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="testpartner">
+<h3>testPartner<a class="headerlink" href="#testpartner" title="Permalink to this headline">¶</a></h3>
+<p>This section can also be discovered automatically and should be left commented out unless the parter pods are modified from the original version in <a class="reference external" href="https://github.com/test-network-function/cnf-certification-test-partner/local-test-infra/">cnf-certification-test-partner</a></p>
+</div>
+<div class="section" id="certifiedcontainerinfo-and-certifiedoperatorinfo">
+<h3>certifiedcontainerinfo and certifiedoperatorinfo<a class="headerlink" href="#certifiedcontainerinfo-and-certifiedoperatorinfo" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">certifiedcontainerinfo</span></code> and <code class="docutils literal notranslate"><span class="pre">certifiedoperatorinfo</span></code> sections contain information about CNFs and Operators that are
+to be checked for certification status on Red Hat catalogs.</p>
+</div>
+</div>
+<div class="section" id="runtime-environement-variables">
+<h2>Runtime environement variables<a class="headerlink" href="#runtime-environement-variables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="turn-off-openshift-required-tests">
+<h3>Turn off openshift required tests<a class="headerlink" href="#turn-off-openshift-required-tests" title="Permalink to this headline">¶</a></h3>
+<p>When test on CNFs that run on k8s only environment, execute shell command below before compile tool and run test shell script.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">TNF_MINIKUBE_ONLY</span><span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disable-intrusive-tests">
+<h3>Disable intrusive tests<a class="headerlink" href="#disable-intrusive-tests" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to skip intrusive tests which may disrupt cluster operations, issue the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">TNF_NON_INTRUSIVE_ONLY</span><span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>Likewise, to enable intrusive tests, set the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">TNF_NON_INTRUSIVE_ONLY</span><span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specifiy-the-location-of-the-partner-repo">
+<h3>Specifiy the location of the partner repo<a class="headerlink" href="#specifiy-the-location-of-the-partner-repo" title="Permalink to this headline">¶</a></h3>
+<p>This env var is optional, but highly recommended if running the test suite from a clone of this github repo. It’s not needed or used if running the tnf image.</p>
+<p>To set it, clone the partner <a class="reference external" href="https://github.com/test-network-function/cnf-certification-test-partner">repo</a> and set TNF_PARTNER_SRC_DIR to point to it.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">TNF_PARTNER_SRC_DIR</span><span class="o">=</span>/home/userid/code/cnf-certification-test-partner
+</pre></div>
+</div>
+<p>When this variable is set, the run-cnf-suites.sh script will deploy/refresh the partner deployments/pods in the cluster before starting the test run.</p>
+</div>
+<div class="section" id="specify-the-target-namespace-for-partner-pod-deployment">
+<h3>Specify the target namespace for partner pod deployment<a class="headerlink" href="#specify-the-target-namespace-for-partner-pod-deployment" title="Permalink to this headline">¶</a></h3>
+<p>Set this variable to deploy partner pods in a custom namespace instead of the default <code class="docutils literal notranslate"><span class="pre">tnf</span></code> namesapce.</p>
+<div class="highlight-shell-script notranslate"><div class="highlight"><pre><span></span>export TNF_PARTNER_NAMESPACE=&quot;CNF-ns&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="specify-the-image-id-to-be-used-with-oc-debug-commands">
+<h3>Specify the image id to be used with oc debug commands<a class="headerlink" href="#specify-the-image-id-to-be-used-with-oc-debug-commands" title="Permalink to this headline">¶</a></h3>
+<p>In disconnected environment, only specific versions of images are mirrored to the local repo. For the <code class="docutils literal notranslate"><span class="pre">oc</span> <span class="pre">debug</span></code> command (used by a number of tests) to work, set TNF_OC_DEBUG_IMAGE_ID:</p>
+<div class="highlight-shell-script notranslate"><div class="highlight"><pre><span></span>export TNF_OC_DEBUG_IMAGE_ID=&quot;quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0f5ce898fbad3671fecd6f797130f950fb1abdbaf0d8154c22e2b59c74e3a918&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="execute-test-suites-from-openshift-kni-cnf-feature-deploy">
+<h3>Execute test suites from openshift-kni/cnf-feature-deploy<a class="headerlink" href="#execute-test-suites-from-openshift-kni-cnf-feature-deploy" title="Permalink to this headline">¶</a></h3>
+<p>The test suites from openshift-kni/cnf-feature-deploy can be run prior to the actual CNF certification test execution and the results are incorporated in the same claim file if the following environment variable is set:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">TNF_RUN_CFD_TEST</span><span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>By default, the image with release tag <code class="docutils literal notranslate"><span class="pre">4.6</span></code> is used and the ginkgo skip argument is set to <code class="docutils literal notranslate"><span class="pre">performance|sriov|ptp|sctp|xt_u32|dpdk|ovn</span></code>. To override the default behavior, set these environment variables: <code class="docutils literal notranslate"><span class="pre">TNF_CFD_IMAGE_TAG</span></code> and <code class="docutils literal notranslate"><span class="pre">TNF_CFD_SKIP</span></code>. For more information on the test suites, refer to <a class="reference external" href="https://github.com/openshift-kni/cnf-features-deploy">the cnf-features-deploy repository</a></p>
+</div>
+</div>
+<div class="section" id="running-the-tests-with-in-a-prebuild-container">
+<h2>Running the tests with in a prebuild container<a class="headerlink" href="#running-the-tests-with-in-a-prebuild-container" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pulling-test-image">
+<h3>Pulling test image<a class="headerlink" href="#pulling-test-image" title="Permalink to this headline">¶</a></h3>
+<p>An image is built and is available at this repository: <a class="reference external" href="https://quay.io/repository/testnetworkfunction/test-network-function">quay.io</a>
+The image can be pulled using :</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker pull quay.io/testnetworkfunction/test-network-function
+</pre></div>
+</div>
+</div>
+<div class="section" id="cluster-requirement">
+<h3>Cluster requirement<a class="headerlink" href="#cluster-requirement" title="Permalink to this headline">¶</a></h3>
+<p>To run all the tests, OCP cluster should provide enough resources to drain nodes and reschedule pods. If that’s not the case, then <code class="docutils literal notranslate"><span class="pre">lifecycle-pod-recreation</span></code> test should be skipped.</p>
+</div>
+<div class="section" id="check-cluster-resources">
+<h3>Check cluster resources<a class="headerlink" href="#check-cluster-resources" title="Permalink to this headline">¶</a></h3>
+<p>Some tests suites such as platform-alteration require node access to get node configuration like hugepage.
+In order to get the required information, the test suite does not ssh into nodes, but instead rely on <a class="reference external" href="https://docs.openshift.com/container-platform/3.7/cli_reference/basic_cli_operations.html#debug">oc debug tools </a>. This tool makes it easier to fetch information from nodes and also to debug running pods.</p>
+<p>In short, oc debug tool will launch a new container ending with “-debug” suffix, the container will be destroyed once the debug session is done. To be able to create the debug pod,  the cluster should have enough resources, otherwise those tests would fail.</p>
+<p><strong>Note:</strong>
+It’s recommended to clean up disk space and make sure there’s enough resources to deploy another container image in every node before starting the tests.</p>
+</div>
+<div class="section" id="run-the-tests">
+<h3>Run the tests<a class="headerlink" href="#run-the-tests" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">./run-tnf-container.sh</span></code> script is used to launch the tests.</p>
+<p>There are several required arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code> gives the local directory that contains tnf config files set up for the test.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code> gives the local directory that the test results will be available in once the container exits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> gives the list of suites to be run, space separated.</p></li>
+</ul>
+<p>Optional arguments are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code> gives a name to a custom TNF container image. Supports local images, as well as images from external registries.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-k</span></code> gives a path to one or more kubeconfig files to be used by the container to authenticate with the cluster. Paths must be separated by a colon.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n</span></code> gives the network mode of the container. Defaults set to <code class="docutils literal notranslate"><span class="pre">host</span></code>, which requires selinux to be disabled. Alternatively, <code class="docutils literal notranslate"><span class="pre">bridge</span></code> mode can be used with selinux if TNF_CONTAINER_CLIENT is set to <code class="docutils literal notranslate"><span class="pre">docker</span></code> or running the test as root. See the <a class="reference external" href="https://docs.docker.com/engine/reference/run/#network-settings">docker run –network parameter reference</a> for more information on how to configure network settings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s</span></code> gives the name of tests that should be skipped</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">-k</span></code> is not specified, autodiscovery is performed.
+The autodiscovery first looks for paths in the <code class="docutils literal notranslate"><span class="pre">$KUBECONFIG</span></code> environment variable on the host system, and if the variable is not set or is empty, the default configuration stored in <code class="docutils literal notranslate"><span class="pre">$HOME/.kube/config</span></code> is checked.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./run-tnf-container.sh -k ~/.kube/config -t ~/tnf/config -o ~/tnf/output -f diagnostic access-control -s access-control-host-resource-PRIVILEGED_POD
+</pre></div>
+</div>
+<p>See <a class="reference external" href="#general-tests">General tests</a> for a list of available keywords.</p>
+<p><em>Note</em>: The <code class="docutils literal notranslate"><span class="pre">run-tnf-container.sh</span></code> script performs autodiscovery of selected TNF environment variables.<br />
+Currently supported environment variables include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TNF_MINIKUBE_ONLY</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="running-using-docker-instead-of-podman">
+<h3>Running using <code class="docutils literal notranslate"><span class="pre">docker</span></code> instead of <code class="docutils literal notranslate"><span class="pre">podman</span></code><a class="headerlink" href="#running-using-docker-instead-of-podman" title="Permalink to this headline">¶</a></h3>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">run-container.sh</span></code> utilizes <code class="docutils literal notranslate"><span class="pre">podman</span></code>.  However, you can configure an alternate container virtualization
+client using <code class="docutils literal notranslate"><span class="pre">TNF_CONTAINER_CLIENT</span></code>.  This is particularly useful for operating systems that do not readily support
+<code class="docutils literal notranslate"><span class="pre">podman</span></code>, such as macOS.  In order to configure the test harness to use <code class="docutils literal notranslate"><span class="pre">docker</span></code>, issue the following prior to
+<code class="docutils literal notranslate"><span class="pre">run-tnf-container.sh</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">TNF_CONTAINER_CLIENT</span><span class="o">=</span><span class="s2">&quot;docker&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-container-image-locally">
+<h3>Building the container image locally<a class="headerlink" href="#building-the-container-image-locally" title="Permalink to this headline">¶</a></h3>
+<p>You can build an image locally by using the command below. Use the value of <code class="docutils literal notranslate"><span class="pre">TNF_VERSION</span></code> to set a branch, a tag, or a hash of a commit that will be installed into the image.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker build -t test-network-function:v1.0.5 --build-arg <span class="nv">TNF_VERSION</span><span class="o">=</span>v1.0.5 .
+</pre></div>
+</div>
+<p>To build an image that installs TNF from an unofficial source (e.g. a fork of the TNF repository), use the <code class="docutils literal notranslate"><span class="pre">TNF_SRC_URL</span></code> build argument to override the URL to a source repository.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker build -t test-network-function:v1.0.5 <span class="se">\</span>
+  --build-arg <span class="nv">TNF_VERSION</span><span class="o">=</span>v1.0.5 <span class="se">\</span>
+  --build-arg <span class="nv">TNF_SRC_URL</span><span class="o">=</span>https://github.com/test-network-function/test-network-function .
+</pre></div>
+</div>
+<p>To make <code class="docutils literal notranslate"><span class="pre">run-tnf-container.sh</span></code> use the newly built image, specify the custom TNF image using the <code class="docutils literal notranslate"><span class="pre">-i</span></code> parameter.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./run-tnf-container.sh -i test-network-function:v1.0.5 -t ~/tnf/config -o ~/tnf/output -f diagnostic access-control
+</pre></div>
+</div>
+<p>Note: see <a class="reference external" href="#general-tests">General tests</a> for a list of available keywords.</p>
+</div>
+</div>
+<div class="section" id="building-and-running-the-standalone-test-executable">
+<h2>Building and running the standalone test executable<a class="headerlink" href="#building-and-running-the-standalone-test-executable" title="Permalink to this headline">¶</a></h2>
+<p>Currently, all available tests are part of the “CNF Certification Test Suite” test suite, which serves as the entrypoint to run all test specs.
+By default, <code class="docutils literal notranslate"><span class="pre">test-network-function</span></code> emits results to <code class="docutils literal notranslate"><span class="pre">test-network-function/cnf-certification-tests_junit.xml</span></code>.</p>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>At a minimum, the following dependencies must be installed <em>prior</em> to running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install-tools</span></code>.</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dependency</p></th>
+<th class="head"><p>Minimum Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://golang.org/dl/">GoLang</a></p></td>
+<td><p>1.14</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://golangci-lint.run/usage/install/">golangci-lint</a></p></td>
+<td><p>1.32.2</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://stedolan.github.io/jq/">jq</a></p></td>
+<td><p>1.6</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://docs.openshift.com/container-platform/4.4/welcome/index.html">OpenShift Client</a></p></td>
+<td><p>4.4</p></td>
+</tr>
+</tbody>
+</table>
+<p>Other binary dependencies required to run tests can be installed using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make install-tools
+</pre></div>
+</div>
+<p>Finally the source dependencies can be installed with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make update-deps
+</pre></div>
+</div>
+<p><em>Note</em>: You must also make sure that <code class="docutils literal notranslate"><span class="pre">$GOBIN</span></code> (default <code class="docutils literal notranslate"><span class="pre">$GOPATH/bin</span></code>) is on your <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
+<p><em>Note</em>:  Efforts to containerize this offering are considered a work in progress.</p>
+</div>
+<div class="section" id="pulling-the-code">
+<h3>Pulling The Code<a class="headerlink" href="#pulling-the-code" title="Permalink to this headline">¶</a></h3>
+<p>In order to pull the code, issue the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir ~/workspace
+<span class="nb">cd</span> ~/workspace
+git clone git@github.com:test-network-function/test-network-function.git
+<span class="nb">cd</span> test-network-function
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-tests">
+<h3>Building the Tests<a class="headerlink" href="#building-the-tests" title="Permalink to this headline">¶</a></h3>
+<p>In order to build the test executable, first make sure you have satisfied the <a class="reference external" href="#dependencies">dependencies</a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make build-cnf-tests
+</pre></div>
+</div>
+<p><em>Gotcha:</em> The <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build*</span></code> commands run unit tests where appropriate. They do NOT test the CNF.</p>
+</div>
+<div class="section" id="testing-a-cnf">
+<h3>Testing a CNF<a class="headerlink" href="#testing-a-cnf" title="Permalink to this headline">¶</a></h3>
+<p>Once the executable is built, a CNF can be tested by specifying which suites to run using the <code class="docutils literal notranslate"><span class="pre">run-cnf-suites.sh</span></code> helper
+script.</p>
+<p>Run any combination of the suites keywords listed at in the <a class="reference external" href="#general-tests">General tests</a> section, e.g.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./run-cnf-suites.sh -f diagnostic
+./run-cnf-suites.sh -f diagnostic lifecycle
+./run-cnf-suites.sh -f diagnostic networking operator
+./run-cnf-suites.sh -f diagnostic platform-alteration
+./run-cnf-suites.sh -f diagnostic lifecycle affiliated-certification operator
+</pre></div>
+</div>
+<p>By default the claim file will be output into the same location as the test executable. The <code class="docutils literal notranslate"><span class="pre">-o</span></code> argument for
+<code class="docutils literal notranslate"><span class="pre">run-cnf-suites.sh</span></code> can be used to provide a new location that the output files will be saved to. For more detailed
+control over the outputs, see the output of <code class="docutils literal notranslate"><span class="pre">test-network-function.test</span> <span class="pre">--help</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> test-network-function <span class="o">&amp;&amp;</span> ./test-network-function.test --help
+</pre></div>
+</div>
+<p><em>Gotcha:</em> The generic test suite requires that the CNF has both <code class="docutils literal notranslate"><span class="pre">ping</span></code> and <code class="docutils literal notranslate"><span class="pre">ip</span></code> binaries installed.  Please add them
+manually if the CNF under test does not include these.  Automated installation of missing dependencies is targeted
+for a future version.
+<em>Gotcha:</em> check that OCP cluster has resources to deploy <a class="reference external" href="#check-cluster-resources">debug image</a></p>
+</div>
+</div>
+<div class="section" id="available-test-specs">
+<h2>Available Test Specs<a class="headerlink" href="#available-test-specs" title="Permalink to this headline">¶</a></h2>
+<p>There are two categories for CNF tests;  ‘General’ and ‘CNF-specific’ (TODO).</p>
+<p>The ‘General’ tests are designed to test any commodity CNF running on OpenShift, and include specifications such as
+‘Default’ network connectivity.</p>
+<p>‘CNF-specific’ tests are designed to test some unique aspects of the CNF under test are behaving correctly.  This could
+include specifications such as issuing a <code class="docutils literal notranslate"><span class="pre">GET</span></code> request to a web server, or passing traffic through an IPSEC tunnel.</p>
+<p>‘CNF-specific’ test are yet to be defined.</p>
+<div class="section" id="general-tests">
+<h3>General tests<a class="headerlink" href="#general-tests" title="Permalink to this headline">¶</a></h3>
+<p>Test in the “general” category belong to multiple suites that can be run in any combination as is
+appropriate for the CNF(s) under test. Test suites group tests by topic area:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Suite</p></th>
+<th class="head"><p>Test Spec Description</p></th>
+<th class="head"><p>Minimum OpenShift Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">access-control</span></code></p></td>
+<td><p>The access-control test suite is used to test  service account, namespace and cluster/pod role binding for the pods under test. It also tests the pods/containers configuration.</p></td>
+<td><p>4.6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">affiliated-certification</span></code></p></td>
+<td><p>The affiliated-certification test suite verifies that the containers in the pod under test and operator under test are certified by Redhat</p></td>
+<td><p>4.6.0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">diagnostic</span></code></p></td>
+<td><p>The diagnostic test suite is used to gather node information from an OpenShift cluster.  The diagnostic test suite should be run whenever generating a claim.json file.</p></td>
+<td><p>4.6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lifecycle</span></code></p></td>
+<td><p>The lifecycle test suite verifies the pods deployment, creation, shutdown and  survivability.</p></td>
+<td><p>4.6.0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">networking</span></code></p></td>
+<td><p>The networking test suite contains tests that check connectivity and networking config related best practices.</p></td>
+<td><p>4.6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">operator</span></code></p></td>
+<td><p>The operator test suite is designed to test basic Kubernetes Operator functionality.</p></td>
+<td><p>4.6.0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">platform-alteration</span></code></p></td>
+<td><p>verifies that key platform configuration is not modified by the CNF under test</p></td>
+<td><p>4.6.0</p></td>
+</tr>
+</tbody>
+</table>
+<p>Please consult <a class="reference internal" href="CATALOG.html"><span class="doc std std-doc">CATALOG.md</span></a> for a detailed description of tests in each suite.</p>
+</div>
+<div class="section" id="cnf-specific-tests">
+<h3>CNF-specific tests<a class="headerlink" href="#cnf-specific-tests" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+</div>
+<div class="section" id="test-output">
+<h2>Test Output<a class="headerlink" href="#test-output" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="claim-file">
+<h3>Claim File<a class="headerlink" href="#claim-file" title="Permalink to this headline">¶</a></h3>
+<p>The test suite generates a “claim” file, which describes the system(s) under test, the tests that were run, and the
+outcome of all of the tests.  This claim file is the proof of the test run that is evaluated by Red Hat when
+“certified” status is being considered.  For more information about the contents of the claim file please see the
+<a class="reference external" href="https://github.com/test-network-function/test-network-function-claim/blob/main/schemas/claim.schema.json">schema</a>.  You can
+read more about the purpose of the claim file and CNF Certification in the
+<a class="reference external" href="https://redhat-connect.gitbook.io/openshift-badges/badges/cloud-native-network-functions-cnf">Guide</a>.</p>
+</div>
+<div class="section" id="adding-test-results-for-the-cnf-validation-test-suite-to-a-claim-file">
+<h3>Adding Test Results for the CNF Validation Test Suite to a Claim File<a class="headerlink" href="#adding-test-results-for-the-cnf-validation-test-suite-to-a-claim-file" title="Permalink to this headline">¶</a></h3>
+<p>e.g. Adding a cnf platform test results to your existing claim file.</p>
+<p>You can use the claim cli tool to append other related test suite results to your existing claim.json file.
+The output of the tool will be an updated claim file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>go run cmd/tools/cmd/main.go claim-add --claimfile=claim.json --reportdir=/home/$USER/reports
+</pre></div>
+</div>
+<p>Args:<br />
+<code class="docutils literal notranslate"> <span class="pre">--claimfile</span> <span class="pre">is</span> <span class="pre">an</span> <span class="pre">existing</span> <span class="pre">claim.json</span> <span class="pre">file</span></code>
+<code class="docutils literal notranslate"><span class="pre">--repordir</span> <span class="pre">:path</span> <span class="pre">to</span> <span class="pre">test</span> <span class="pre">results</span> <span class="pre">that</span> <span class="pre">you</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">include.</span></code></p>
+<p>The tests result files from the given report dir will be appended under the result section of the claim file using file name as the key/value pair.
+The tool will ignore the test result, if the key name is already present under result section of the claim file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="p">{</span>
+ <span class="s2">&quot;cnf-certification-tests_junit&quot;</span><span class="p">:</span> <span class="p">{</span>
+ <span class="s2">&quot;testsuite&quot;</span><span class="p">:</span> <span class="p">{</span>
+ <span class="s2">&quot;-errors&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;-failures&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;-name&quot;</span><span class="p">:</span> <span class="s2">&quot;CNF Certification Test Suite&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;-tests&quot;</span><span class="p">:</span> <span class="s2">&quot;14&quot;</span><span class="p">,</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="command-line-output">
+<h3>Command Line Output<a class="headerlink" href="#command-line-output" title="Permalink to this headline">¶</a></h3>
+<p>When run the CNF test suite will output a report to the terminal that is primarily useful for Developers to evaluate and
+address problems.  This output is similar to many testing tools.</p>
+<div class="section" id="test-successful-output-example">
+<h4>Test successful output example<a class="headerlink" href="#test-successful-output-example" title="Permalink to this headline">¶</a></h4>
+<p>Here’s an example of a Test pass.  It verifies that the CNF is using a replica set:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>------------------------------
+lifecycle when Testing owners of CNF pod 
+  Should be only ReplicaSet
+  /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/lifecycle/suite.go:339
+<span class="m">2021</span>/07/27 <span class="m">11</span>:41:25 Sent: <span class="s2">&quot;oc -n tnf get pods test-697ff58f87-d55zx -o custom-columns=OWNERKIND:.metadata.ownerReferences\\[\\*\\].kind &amp;&amp; echo END_OF_TEST_SENTINEL\n&quot;</span>
+<span class="m">2021</span>/07/27 <span class="m">11</span>:41:26 Match <span class="k">for</span> RE: <span class="s2">&quot;(?s)OWNERKIND\n.+((.|\n)*END_OF_TEST_SENTINEL\n)&quot;</span> found: <span class="o">[</span><span class="s2">&quot;OWNERKIND\nReplicaSet\nEND_OF_TEST_SENTINEL\n&quot;</span> <span class="s2">&quot;END_OF_TEST_SENTINEL\n&quot;</span> <span class="s2">&quot;&quot;</span><span class="o">]</span> Buffer: <span class="s2">&quot;OWNERKIND\nReplicaSet\nEND_OF_TEST_SENTINEL\n&quot;</span>
+•
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-failed-output-examples">
+<h4>Test failed output examples<a class="headerlink" href="#test-failed-output-examples" title="Permalink to this headline">¶</a></h4>
+<p>The following is the output from a Test failure.  In this case, the test is checking that a CSV (ClusterServiceVersion)
+is installed correctly, but does not find it (the operator was not present on the cluster under test):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>------------------------------
+operator Runs <span class="nb">test</span> on operators when under <span class="nb">test</span> is: my-etcd/etcdoperator.v0.9.4  
+  tests <span class="k">for</span>: CSV_INSTALLED
+  /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:122
+<span class="m">2020</span>/12/15 <span class="m">15</span>:28:19 Sent: <span class="s2">&quot;oc get csv etcdoperator.v0.9.4 -n my-etcd -o json | jq -r &#39;.status.phase&#39;\n&quot;</span>
+
+• Failure <span class="o">[</span><span class="m">10</span>.002 seconds<span class="o">]</span>
+operator
+/Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:58
+  Runs <span class="nb">test</span> on operators
+  /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:71
+    when under <span class="nb">test</span> is: my-etcd/etcdoperator.v0.9.4 
+    /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:121
+      tests <span class="k">for</span>: CSV_INSTALLED <span class="o">[</span>It<span class="o">]</span>
+      /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:122
+
+      Expected
+          &lt;int&gt;: <span class="m">0</span>
+      to equal
+          &lt;int&gt;: <span class="m">1</span>
+</pre></div>
+</div>
+<p>The following is the output from a Test failure.  In this case, the test is checking that a Subscription
+is installed correctly, but does not find it (the operator was not present on the cluster under test):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>------------------------------
+operator Runs <span class="nb">test</span> on operators when under <span class="nb">test</span> is: my-etcd/etcd
+  tests <span class="k">for</span>: SUBSCRIPTION_INSTALLED
+  /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:129
+<span class="m">2021</span>/04/09 <span class="m">12</span>:37:10 Sent: <span class="s2">&quot;oc get subscription etcd -n my-etcd -ojson | jq -r &#39;.spec.name&#39;\n&quot;</span>
+
+• Failure <span class="o">[</span><span class="m">10</span>.000 seconds<span class="o">]</span>
+operator
+/Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:55
+  Runs <span class="nb">test</span> on operators
+  /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:68
+    when under <span class="nb">test</span> is: default/etcdoperator.v0.9.4 
+    /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:128
+      tests <span class="k">for</span>: SUBSCRIPTION_INSTALLED <span class="o">[</span>It<span class="o">]</span>
+      /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:129
+
+      Expected
+          &lt;int&gt;: <span class="m">0</span>
+      to equal
+          &lt;int&gt;: <span class="m">1</span>
+</pre></div>
+</div>
+<p>The following is the output from a Test failure.  In this case, the test is checking clusterPermissions for
+specific CSV, but does not find it (the operator was not present on the cluster under test):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>------------------------------
+operator Runs <span class="nb">test</span> on operators 
+  should eventually be verified as certified <span class="o">(</span>operator redhat-marketplace/etcd-operator<span class="o">)</span>
+  /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:146
+
+• Failure <span class="o">[</span><span class="m">30</span>.002 seconds<span class="o">]</span>
+operator
+/Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:76
+  Runs <span class="nb">test</span> on operators
+  /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:89
+    should eventually be verified as certified <span class="o">(</span>operator redhat-marketplace/etcd-operator<span class="o">)</span> <span class="o">[</span>It<span class="o">]</span>
+    /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:146
+
+    Timed out after <span class="m">30</span>.001s.
+    Expected
+        &lt;bool&gt;: <span class="nb">false</span>
+    to be <span class="nb">true</span>
+
+    /Users/<span class="nv">$USER</span>/cnf-cert/test-network-function/test-network-function/operator/suite.go:152
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="log-level">
+<h2>Log level<a class="headerlink" href="#log-level" title="Permalink to this headline">¶</a></h2>
+<p>The optional LOG_LEVEL environment variable sets the log level. Defaults to “info” if not set. Valid values are: trace, debug, info, warn, error, fatal, panic.</p>
+</div>
+<div class="section" id="grading-tool">
+<h2>Grading Tool<a class="headerlink" href="#grading-tool" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Overview<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>A tool for processing the claim file and producing a quality grade for the CNF.
+The user supplies a policy conforming to <span class="xref myst">policy schema</span>.
+A grade is considered <code class="docutils literal notranslate"><span class="pre">passed</span></code> if all its direct tests passed and its base grade passed.
+In the output we use the field <code class="docutils literal notranslate"><span class="pre">propose</span></code> to indicate grade passed or failed.
+See <span class="xref myst">policy example</span> for understanding the output of the grading tool.</p>
+</div>
+<div class="section" id="how-to-build-and-execute">
+<h3>How to build and execute<a class="headerlink" href="#how-to-build-and-execute" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">build</span>
+<span class="ow">or</span>
+<span class="n">make</span> <span class="n">build</span><span class="o">-</span><span class="n">gradetool</span>
+</pre></div>
+</div>
+<p>Executable name is <code class="docutils literal notranslate"><span class="pre">gradetool</span></code>.</p>
+</div>
+</div>
+<div class="section" id="cnf-developers">
+<h2>CNF Developers<a class="headerlink" href="#cnf-developers" title="Permalink to this headline">¶</a></h2>
+<p>Developers of CNFs, particularly those targeting
+<a class="reference external" href="https://redhat-connect.gitbook.io/openshift-badges/badges/cloud-native-network-functions-cnf">CNF Certification with Red Hat on OpenShift</a>,
+can use this suite to test the interaction of their CNF with OpenShift.  If you are interested in CNF Certification
+please contact <a class="reference external" href="https://redhat-connect.gitbook.io/red-hat-partner-connect-general-guide/managing-your-account/getting-help/technology-partner-success-desk">Red Hat</a>.</p>
+<p>Refer to the rest of the documentation in this file to see how to install and run the tests as well as how to
+interpret the results.</p>
+<p>You will need an <a class="reference external" href="https://docs.openshift.com/container-platform/4.4/welcome/index.html">OpenShift 4.4 installation</a>
+running your CNF, and at least one other machine available to host the test suite.  The
+<a class="reference external" href="https://github.com/test-network-function/cnf-certification-test-partner">cnf-certification-test-partner</a> repository has a very
+simple example of this you can model your setup on.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="known-issues">
+<h1>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="issue-146-shell-output-larger-than-16kb-requires-specification-of-the-tnf-default-buffer-size-environment-variable">
+<h2>Issue #146:  Shell Output larger than 16KB requires specification of the TNF_DEFAULT_BUFFER_SIZE environment variable<a class="headerlink" href="#issue-146-shell-output-larger-than-16kb-requires-specification-of-the-tnf-default-buffer-size-environment-variable" title="Permalink to this headline">¶</a></h2>
+<p>When dealing with large output, you may occasionally overrun the default buffer size. The manifestation of this issue is
+a <code class="docutils literal notranslate"><span class="pre">json.SyntaxError</span></code>, and may look similar to the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>    Expected
+        &lt;*json.SyntaxError <span class="p">|</span> 0xc0002bc020&gt;: <span class="o">{</span>
+            msg: <span class="s2">&quot;unexpected end of JSON input&quot;</span>,
+            Offset: <span class="m">660</span>,
+        <span class="o">}</span>
+    to be nil
+</pre></div>
+</div>
+<p>In such cases, you will need to set the TNF_DEFAULT_BUFFER_SIZE to a sufficient size (in bytes) to handle the expected
+output.</p>
+<p>For example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">TNF_DEFAULT_BUFFER_SIZE</span><span class="o">=</span><span class="m">32768</span> ./run-cnf-suites.sh -f diagnostic
+</pre></div>
+</div>
+</div>
+<div class="section" id="issue-161-some-containers-under-test-do-not-contain-ping-or-ip-binary-utilities">
+<h2>Issue-161 Some containers under test do not contain <code class="docutils literal notranslate"><span class="pre">ping</span></code> or <code class="docutils literal notranslate"><span class="pre">ip</span></code> binary utilities<a class="headerlink" href="#issue-161-some-containers-under-test-do-not-contain-ping-or-ip-binary-utilities" title="Permalink to this headline">¶</a></h2>
+<p>In some cases, containers do not provide ping or ip binary utilities. Since these binaries are required for the
+connectivity tests, we must exclude such containers from the connectivity test suite.  In order to exclude these
+containers, please add the following to <code class="docutils literal notranslate"><span class="pre">test-network-function/tnf_config.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">excludeContainersFromConnectivityTests</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;namespace&gt;</span>
+    <span class="nt">podName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;podName&gt;</span>
+    <span class="nt">containerName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;containerName&gt;</span>
+</pre></div>
+</div>
+<p>Note:  Future work may involve installing missing binary dependencies.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, test-network-function.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

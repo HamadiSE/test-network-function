@@ -1,0 +1,2136 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>test-network-function test case catalog &mdash; test-network-function v3.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> test-network-function
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">test-network-function test case catalog</a><ul>
+<li><a class="reference internal" href="#test-case-catalog">Test Case Catalog</a><ul>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-access-control-cluster-role-bindings">http://test-network-function.com/testcases/access-control/cluster-role-bindings</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-access-control-host-resource">http://test-network-function.com/testcases/access-control/host-resource</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-access-control-namespace">http://test-network-function.com/testcases/access-control/namespace</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-access-control-pod-role-bindings">http://test-network-function.com/testcases/access-control/pod-role-bindings</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-access-control-pod-service-account">http://test-network-function.com/testcases/access-control/pod-service-account</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-affiliated-certification-container-is-certified">http://test-network-function.com/testcases/affiliated-certification/container-is-certified</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-affiliated-certification-operator-is-certified">http://test-network-function.com/testcases/affiliated-certification/operator-is-certified</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-diagnostic-cluster-csi-info">http://test-network-function.com/testcases/diagnostic/cluster-csi-info</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-diagnostic-extract-node-information">http://test-network-function.com/testcases/diagnostic/extract-node-information</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-diagnostic-list-cni-plugins">http://test-network-function.com/testcases/diagnostic/list-cni-plugins</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-diagnostic-nodes-hw-info">http://test-network-function.com/testcases/diagnostic/nodes-hw-info</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-lifecycle-container-shutdown">http://test-network-function.com/testcases/lifecycle/container-shutdown</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-lifecycle-pod-high-availability">http://test-network-function.com/testcases/lifecycle/pod-high-availability</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-lifecycle-pod-owner-type">http://test-network-function.com/testcases/lifecycle/pod-owner-type</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-lifecycle-pod-recreation">http://test-network-function.com/testcases/lifecycle/pod-recreation</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-lifecycle-pod-scheduling">http://test-network-function.com/testcases/lifecycle/pod-scheduling</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-lifecycle-pod-termination-grace-period">http://test-network-function.com/testcases/lifecycle/pod-termination-grace-period</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-lifecycle-scaling">http://test-network-function.com/testcases/lifecycle/scaling</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-networking-icmpv4-connectivity">http://test-network-function.com/testcases/networking/icmpv4-connectivity</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-networking-service-type">http://test-network-function.com/testcases/networking/service-type</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-operator-install-source">http://test-network-function.com/testcases/operator/install-source</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-operator-install-status">http://test-network-function.com/testcases/operator/install-status</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-platform-alteration-base-image">http://test-network-function.com/testcases/platform-alteration/base-image</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-platform-alteration-boot-params">http://test-network-function.com/testcases/platform-alteration/boot-params</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-platform-alteration-hugepages-config">http://test-network-function.com/testcases/platform-alteration/hugepages-config</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-platform-alteration-isredhat-release">http://test-network-function.com/testcases/platform-alteration/isredhat-release</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-platform-alteration-sysctl-config">http://test-network-function.com/testcases/platform-alteration/sysctl-config</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-testcases-platform-alteration-tainted-node-kernel">http://test-network-function.com/testcases/platform-alteration/tainted-node-kernel</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-case-building-blocks-catalog">Test Case Building Blocks Catalog</a><ul>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-clusterrolebinding">http://test-network-function.com/tests/clusterrolebinding</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-container-pod">http://test-network-function.com/tests/container/pod</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-csidriver">http://test-network-function.com/tests/csiDriver</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-currentkernelcmdlineargs">http://test-network-function.com/tests/currentKernelCmdlineArgs</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-deployments">http://test-network-function.com/tests/deployments</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-deploymentsnodes">http://test-network-function.com/tests/deploymentsnodes</a></li>
+<li><a class="reference internal" href="#id1">http://test-network-function.com/tests/deploymentsnodes</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-generic-cnf-fs-diff">http://test-network-function.com/tests/generic/cnf_fs_diff</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-generic-containerid">http://test-network-function.com/tests/generic/containerId</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-generic-version">http://test-network-function.com/tests/generic/version</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-graceperiod">http://test-network-function.com/tests/gracePeriod</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-grubkernelcmdlineargs">http://test-network-function.com/tests/grubKernelCmdlineArgs</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-hostname">http://test-network-function.com/tests/hostname</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-hugepages">http://test-network-function.com/tests/hugepages</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-ipaddr">http://test-network-function.com/tests/ipaddr</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-logging">http://test-network-function.com/tests/logging</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-mckernelarguments">http://test-network-function.com/tests/mckernelarguments</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-node-uncordon">http://test-network-function.com/tests/node/uncordon</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-nodedebug">http://test-network-function.com/tests/nodedebug</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-nodehugepages">http://test-network-function.com/tests/nodehugepages</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-nodemcname">http://test-network-function.com/tests/nodemcname</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-nodenames">http://test-network-function.com/tests/nodenames</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-nodeport">http://test-network-function.com/tests/nodeport</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-nodes">http://test-network-function.com/tests/nodes</a></li>
+<li><a class="reference internal" href="#id2">http://test-network-function.com/tests/nodehugepages</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-nodetainted">http://test-network-function.com/tests/nodetainted</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-operator">http://test-network-function.com/tests/operator</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-operator-check-subscription">http://test-network-function.com/tests/operator/check-subscription</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-owners">http://test-network-function.com/tests/owners</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-ping">http://test-network-function.com/tests/ping</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-podnodename">http://test-network-function.com/tests/podnodename</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-readremotefile">http://test-network-function.com/tests/readRemoteFile</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-rolebinding">http://test-network-function.com/tests/rolebinding</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-scaling">http://test-network-function.com/tests/scaling</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-serviceaccount">http://test-network-function.com/tests/serviceaccount</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-shutdown">http://test-network-function.com/tests/shutdown</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-sysctlallconfigsargs">http://test-network-function.com/tests/sysctlAllConfigsArgs</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-sysctlconfigfileslist">http://test-network-function.com/tests/sysctlConfigFilesList</a></li>
+<li><a class="reference internal" href="#http-test-network-function-com-tests-testpodhighavailability">http://test-network-function.com/tests/testPodHighAvailability</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">test-network-function</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>test-network-function test case catalog</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/CATALOG.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="tex2jax_ignore mathjax_ignore section" id="test-network-function-test-case-catalog">
+<h1>test-network-function test case catalog<a class="headerlink" href="#test-network-function-test-case-catalog" title="Permalink to this headline">¶</a></h1>
+<p>test-network-function contains a variety of <code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">Cases</span></code>, as well as <code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">Case</span> <span class="pre">Building</span> <span class="pre">Blocks</span></code>.</p>
+<ul class="simple">
+<li><p>Test Cases:  Traditional JUnit testcases, which are specified internally using <code class="docutils literal notranslate"><span class="pre">Ginkgo.It</span></code>.  Test cases often utilize several Test Case Building Blocks.</p></li>
+<li><p>Test Case Building Blocks:  Self-contained building blocks, which perform a small task in the context of <code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, <code class="docutils literal notranslate"><span class="pre">shell</span></code>, or some other <code class="docutils literal notranslate"><span class="pre">Expecter</span></code>.</p></li>
+</ul>
+<div class="section" id="test-case-catalog">
+<h2>Test Case Catalog<a class="headerlink" href="#test-case-catalog" title="Permalink to this headline">¶</a></h2>
+<p>Test Cases are the specifications used to perform a meaningful test.  Test cases may run once, or several times against several targets.  CNF Certification includes a number of normative and informative tests to ensure CNFs follow best practices.  Here is the list of available Test Cases:</p>
+<div class="section" id="http-test-network-function-com-testcases-access-control-cluster-role-bindings">
+<h3>http://test-network-function.com/testcases/access-control/cluster-role-bindings<a class="headerlink" href="#http-test-network-function-com-testcases-access-control-cluster-role-bindings" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/access-control/cluster-role-bindings tests that a Pod does not specify ClusterRoleBindings.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>In most cases, Pod’s should not have ClusterRoleBindings.  The suggested remediation is to remove the need for ClusterRoleBindings, if possible.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-access-control-host-resource">
+<h3>http://test-network-function.com/testcases/access-control/host-resource<a class="headerlink" href="#http-test-network-function-com-testcases-access-control-host-resource" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/access-control/host-resource tests several aspects of CNF best practices, including: 1. The Pod does not have access to Host Node Networking. 2. The Pod does not have access to Host Node Ports. 3. The Pod cannot access Host Node IPC space. 4. The Pod cannot access Host Node PID space. 5. The Pod is not granted NET_ADMIN SCC. 6. The Pod is not granted SYS_ADMIN SCC. 7. The Pod does not run as root. 8. The Pod does not allow privileged escalation.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that each Pod in the CNF abides by the suggested best practices listed in the test description.  In some rare cases, not all best practices can be followed.  For example, some CNFs may be required to run as root.  Such exceptions should be handled on a case-by-case basis, and should provide a proper justification as to why the best practice(s) cannot be followed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-access-control-namespace">
+<h3>http://test-network-function.com/testcases/access-control/namespace<a class="headerlink" href="#http-test-network-function-com-testcases-access-control-namespace" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/access-control/namespace tests that CNFs utilize a CNF-specific namespace, and that the namespace does not start with “openshift-“. OpenShift may host a variety of CNF and software applications, and multi-tenancy of such applications is supported through namespaces.  As such, each CNF should be a good neighbor, and utilize an appropriate, unique namespace.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that your CNF utilizes a CNF-specific namespace.  Additionally, the CNF-specific namespace should not start with “openshift-“, except in rare cases.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-access-control-pod-role-bindings">
+<h3>http://test-network-function.com/testcases/access-control/pod-role-bindings<a class="headerlink" href="#http-test-network-function-com-testcases-access-control-pod-role-bindings" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/access-control/pod-role-bindings ensures that a CNF does not utilize RoleBinding(s) in a non-CNF Namespace.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure the CNF is not configured to use RoleBinding(s) in a non-CNF Namespace.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-access-control-pod-service-account">
+<h3>http://test-network-function.com/testcases/access-control/pod-service-account<a class="headerlink" href="#http-test-network-function-com-testcases-access-control-pod-service-account" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/access-control/pod-service-account tests that each CNF Pod utilizes a valid Service Account.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that the each CNF Pod is configured to use a valid Service Account</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-affiliated-certification-container-is-certified">
+<h3>http://test-network-function.com/testcases/affiliated-certification/container-is-certified<a class="headerlink" href="#http-test-network-function-com-testcases-affiliated-certification-container-is-certified" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/affiliated-certification/container-is-certified tests whether container images have passed the Red Hat Container Certification Program (CCP).</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that your container has passed the Red Hat Container Certification Program (CCP).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-affiliated-certification-operator-is-certified">
+<h3>http://test-network-function.com/testcases/affiliated-certification/operator-is-certified<a class="headerlink" href="#http-test-network-function-com-testcases-affiliated-certification-operator-is-certified" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/affiliated-certification/operator-is-certified tests whether CNF Operators have passed the Red Hat Operator Certification Program (OCP).</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that your Operator has passed Red Hat’s Operator Certification Program (OCP).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-diagnostic-cluster-csi-info">
+<h3>http://test-network-function.com/testcases/diagnostic/cluster-csi-info<a class="headerlink" href="#http-test-network-function-com-testcases-diagnostic-cluster-csi-info" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/diagnostic/cluster-csi-info extracts CSI driver information in the cluster.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>informative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-diagnostic-extract-node-information">
+<h3>http://test-network-function.com/testcases/diagnostic/extract-node-information<a class="headerlink" href="#http-test-network-function-com-testcases-diagnostic-extract-node-information" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/diagnostic/extract-node-information extracts informational information about the cluster.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>informative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-diagnostic-list-cni-plugins">
+<h3>http://test-network-function.com/testcases/diagnostic/list-cni-plugins<a class="headerlink" href="#http-test-network-function-com-testcases-diagnostic-list-cni-plugins" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/diagnostic/list-cni-plugins lists CNI plugins</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-diagnostic-nodes-hw-info">
+<h3>http://test-network-function.com/testcases/diagnostic/nodes-hw-info<a class="headerlink" href="#http-test-network-function-com-testcases-diagnostic-nodes-hw-info" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/diagnostic/nodes-hw-info list nodes HW info</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-lifecycle-container-shutdown">
+<h3>http://test-network-function.com/testcases/lifecycle/container-shutdown<a class="headerlink" href="#http-test-network-function-com-testcases-lifecycle-container-shutdown" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/lifecycle/container-shutdown Ensure that the containers lifecycle pre-stop management feature is configured.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>It’s considered best-practices to define prestop for proper management of container lifecycle. 		The prestop can be used to gracefully stop the container and clean resources (e.g., DB connexion). 		 		The prestop can be configured using : 		 1) Exec : executes the supplied command inside the container 		 2) HTTP : executes HTTP request against the specified endpoint. 		 		When defined. K8s will handle shutdown of the container using the following: 		1) K8s first execute the preStop hook inside the container. 		2) K8s will wait for a grace perdiod. 		3) K8s will clean the remaining processes using KILL signal.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-lifecycle-pod-high-availability">
+<h3>http://test-network-function.com/testcases/lifecycle/pod-high-availability<a class="headerlink" href="#http-test-network-function-com-testcases-lifecycle-pod-high-availability" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/lifecycle/pod-high-availability ensures that CNF Pods specify podAntiAffinity rules and replica value is set to more than 1.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>informative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>In high availability cases, Pod podAntiAffinity rule should be specified for pod scheduling and pod replica value is set to more than 1 .</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-lifecycle-pod-owner-type">
+<h3>http://test-network-function.com/testcases/lifecycle/pod-owner-type<a class="headerlink" href="#http-test-network-function-com-testcases-lifecycle-pod-owner-type" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/lifecycle/pod-owner-type tests that CNF Pod(s) are deployed as part of a ReplicaSet(s).</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Deploy the CNF using ReplicaSet.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-lifecycle-pod-recreation">
+<h3>http://test-network-function.com/testcases/lifecycle/pod-recreation<a class="headerlink" href="#http-test-network-function-com-testcases-lifecycle-pod-recreation" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/lifecycle/pod-recreation tests that a CNF is configured to support High Availability.   			First, this test cordons and drains a Node that hosts the CNF Pod.   			Next, the test ensures that OpenShift can re-instantiate the Pod on another Node,  			and that the actual replica count matches the desired replica count.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that CNF Pod(s) utilize a configuration that supports High Availability.   			Additionally, ensure that there are available Nodes in the OpenShift cluster that can be utilized in the event that a host Node fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-lifecycle-pod-scheduling">
+<h3>http://test-network-function.com/testcases/lifecycle/pod-scheduling<a class="headerlink" href="#http-test-network-function-com-testcases-lifecycle-pod-scheduling" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/lifecycle/pod-scheduling ensures that CNF Pods do not specify nodeSelector or nodeAffinity.  In most cases, Pods should allow for instantiation on any underlying Node.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>informative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>In most cases, Pod’s should not specify their host Nodes through nodeSelector or nodeAffinity.  However, there are cases in which CNFs require specialized hardware specific to a particular class of Node.  As such, this test is purely informative, and will not prevent a CNF from being certified. However, one should have an appropriate justification as to why nodeSelector and/or nodeAffinity is utilized by a CNF.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-lifecycle-pod-termination-grace-period">
+<h3>http://test-network-function.com/testcases/lifecycle/pod-termination-grace-period<a class="headerlink" href="#http-test-network-function-com-testcases-lifecycle-pod-termination-grace-period" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/lifecycle/pod-termination-grace-period tests whether the terminationGracePeriod is CNF-specific, or if the default (30s) is utilized.  This test is informative, and will not affect CNF Certification.  In many cases, the default terminationGracePeriod is perfectly acceptable for a CNF.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>informative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Choose a terminationGracePeriod that is appropriate for your given CNF.  If the default (30s) is appropriate, then feel free to ignore this informative message.  This test is meant to raise awareness around how Pods are terminated, and to suggest that a CNF is configured based on its requirements.  In addition to a terminationGracePeriod, consider utilizing a termination hook in the case that your application requires special shutdown instructions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-lifecycle-scaling">
+<h3>http://test-network-function.com/testcases/lifecycle/scaling<a class="headerlink" href="#http-test-network-function-com-testcases-lifecycle-scaling" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/lifecycle/scaling tests that CNF deployments support scale in/out operations.  			First, The test starts getting the current replicaCount (N) of the deployment/s with the Pod Under Test. Then, it executes the  			scale-in oc command for (N-1) replicas. Lastly, it executes the scale-out oc command, restoring the original replicaCount of the deployment/s.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Make sure CNF deployments/replica sets can scale in/out successfully.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-networking-icmpv4-connectivity">
+<h3>http://test-network-function.com/testcases/networking/icmpv4-connectivity<a class="headerlink" href="#http-test-network-function-com-testcases-networking-icmpv4-connectivity" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/networking/icmpv4-connectivity checks that each CNF Container is able to communicate via ICMPv4 on the Default OpenShift network.  This test case requires the Deployment of the <a class="reference external" href="https://github.com/test-network-function/cnf-certification-test-partner/blob/main/test-partner/partner.yaml">CNF Certification Test Partner</a>. The test ensures that all CNF containers respond to ICMPv4 requests from the Partner Pod, and vice-versa.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that the CNF is able to communicate via the Default OpenShift network.  In some rare cases, CNFs may require routing table changes in order to communicate over the Default network.  In other cases, if the Container base image does not provide the “ip” or “ping” binaries, this test may not be applicable.  For instructions on how to exclude a particular container from ICMPv4 connectivity tests, consult: <a class="reference external" href="https://github.com/test-network-function/test-network-function#issue-161-some-containers-under-test-do-nto-contain-ping-or-ip-binary-utilities">README.md</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-networking-service-type">
+<h3>http://test-network-function.com/testcases/networking/service-type<a class="headerlink" href="#http-test-network-function-com-testcases-networking-service-type" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/networking/service-type tests that each CNF Service does not utilize NodePort(s).</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure Services are not configured to use NodePort(s).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-operator-install-source">
+<h3>http://test-network-function.com/testcases/operator/install-source<a class="headerlink" href="#http-test-network-function-com-testcases-operator-install-source" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/operator/install-source tests whether a CNF Operator is installed via OLM.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that your Operator is installed via OLM.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-operator-install-status">
+<h3>http://test-network-function.com/testcases/operator/install-status<a class="headerlink" href="#http-test-network-function-com-testcases-operator-install-status" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/operator/install-status Ensures that CNF Operators abide by best practices.  The following is tested: 1. The Operator CSV reports “Installed” status. 2. The operator is not installed with privileged rights. Test passes if clusterPermissions is not present in the CSV manifest or is present  with no resourceNames under its rules.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that your Operator abides by the Operator Best Practices mentioned in the description.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-platform-alteration-base-image">
+<h3>http://test-network-function.com/testcases/platform-alteration/base-image<a class="headerlink" href="#http-test-network-function-com-testcases-platform-alteration-base-image" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/platform-alteration/base-image ensures that the Container Base Image is not altered post-startup.  This test is a heuristic, and ensures that there are no changes to the following directories: 1) /var/lib/rpm 2) /var/lib/dpkg 3) /bin 4) /sbin 5) /lib 6) /lib64 7) /usr/bin 8) /usr/sbin 9) /usr/lib 10) /usr/lib64</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that Container applications do not modify the Container Base Image.  In particular, ensure that the following directories are not modified: 1) /var/lib/rpm 2) /var/lib/dpkg 3) /bin 4) /sbin 5) /lib 6) /lib64 7) /usr/bin 8) /usr/sbin 9) /usr/lib 10) /usr/lib64 Ensure that all required binaries are built directly into the container image, and are not installed post startup.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-platform-alteration-boot-params">
+<h3>http://test-network-function.com/testcases/platform-alteration/boot-params<a class="headerlink" href="#http-test-network-function-com-testcases-platform-alteration-boot-params" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/platform-alteration/boot-params tests that boot parameters are set through the MachineConfigOperator, and not set manually on the Node.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Ensure that boot parameters are set directly through the MachineConfigOperator, or indirectly through the PerformanceAddonOperator.  Boot parameters should not be changed directly through the Node, as OpenShift should manage the changes for you.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-platform-alteration-hugepages-config">
+<h3>http://test-network-function.com/testcases/platform-alteration/hugepages-config<a class="headerlink" href="#http-test-network-function-com-testcases-platform-alteration-hugepages-config" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/platform-alteration/hugepages-config checks to see that HugePage settings have been configured through MachineConfig, and not manually on the underlying Node.  This test case applies only to Nodes that are configured with the “worker” MachineConfigSet.  First, the “worker” MachineConfig is polled, and the Hugepage settings are extracted.  Next, the underlying Nodes are polled for configured HugePages through inspection of /proc/meminfo.  The results are compared, and the test passes only if they are the same.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>HugePage settings should be configured either directly through the MachineConfigOperator or indirectly using the PeformanceAddonOperator.  This ensures that OpenShift is aware of the special MachineConfig requirements, and can provision your CNF on a Node that is part of the corresponding MachineConfigSet.  Avoid making changes directly to an underlying Node, and let OpenShift handle the heavy lifting of configuring advanced settings.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-platform-alteration-isredhat-release">
+<h3>http://test-network-function.com/testcases/platform-alteration/isredhat-release<a class="headerlink" href="#http-test-network-function-com-testcases-platform-alteration-isredhat-release" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/platform-alteration/isredhat-release The test verifies if the container base image is redhat.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>build a new docker image that’s based on UBI (redhat universal base image).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-platform-alteration-sysctl-config">
+<h3>http://test-network-function.com/testcases/platform-alteration/sysctl-config<a class="headerlink" href="#http-test-network-function-com-testcases-platform-alteration-sysctl-config" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/lifecycle/pod-recreation tests that no one has changed the node’s sysctl configs after the node 			was created, the tests works by checking if the sysctl configs are consistent with the 			MachineConfig CR which defines how the node should be configured</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>You should recreate the node or change the sysctls, recreating is recommended because there might be other unknown changes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-testcases-platform-alteration-tainted-node-kernel">
+<h3>http://test-network-function.com/testcases/platform-alteration/tainted-node-kernel<a class="headerlink" href="#http-test-network-function-com-testcases-platform-alteration-tainted-node-kernel" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>http://test-network-function.com/testcases/platform-alteration/tainted-node-kernel ensures that the Node(s) hosting CNFs do not utilize tainted kernels. This test case is especially important to support Highly Available CNFs, since when a CNF is re-instantiated on a backup Node, that Node’s kernel may not have the same hacks.’</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suggested Remediation</p></td>
+<td><p>Test failure indicates that the underlying Node’s’ kernel is tainted.  Ensure that you have not altered underlying Node(s) kernels in order to run the CNF.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="test-case-building-blocks-catalog">
+<h2>Test Case Building Blocks Catalog<a class="headerlink" href="#test-case-building-blocks-catalog" title="Permalink to this headline">¶</a></h2>
+<p>A number of Test Case Building Blocks, or <code class="docutils literal notranslate"><span class="pre">tnf.Test</span></code>s, are included out of the box.  This is a summary of the available implementations:</p>
+<div class="section" id="http-test-network-function-com-tests-clusterrolebinding">
+<h3>http://test-network-function.com/tests/clusterrolebinding<a class="headerlink" href="#http-test-network-function-com-tests-clusterrolebinding" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to test ClusterRoleBindings of CNF pod’s ServiceAccount.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-container-pod">
+<h3>http://test-network-function.com/tests/container/pod<a class="headerlink" href="#http-test-network-function-com-tests-container-pod" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A container-specific test suite used to verify various aspects of the underlying container.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jq</span></code>, <code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-csidriver">
+<h3>http://test-network-function.com/tests/csiDriver<a class="headerlink" href="#http-test-network-function-com-tests-csidriver" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>extracts the csi driver info in the cluser</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-currentkernelcmdlineargs">
+<h3>http://test-network-function.com/tests/currentKernelCmdlineArgs<a class="headerlink" href="#http-test-network-function-com-tests-currentkernelcmdlineargs" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to get node’s /proc/cmdline</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cat</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-deployments">
+<h3>http://test-network-function.com/tests/deployments<a class="headerlink" href="#http-test-network-function-com-tests-deployments" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to read namespace’s deployments</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-deploymentsnodes">
+<h3>http://test-network-function.com/tests/deploymentsnodes<a class="headerlink" href="#http-test-network-function-com-tests-deploymentsnodes" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to drain node from its deployment pods</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jq</span></code>, <code class="docutils literal notranslate"><span class="pre">echo</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h3>http://test-network-function.com/tests/deploymentsnodes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to read node names of pods owned by deployments in namespace</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-generic-cnf-fs-diff">
+<h3>http://test-network-function.com/tests/generic/cnf_fs_diff<a class="headerlink" href="#http-test-network-function-com-tests-generic-cnf-fs-diff" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A test used to check if there were no installation during container runtime</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grep</span></code>, <code class="docutils literal notranslate"><span class="pre">cut</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-generic-containerid">
+<h3>http://test-network-function.com/tests/generic/containerId<a class="headerlink" href="#http-test-network-function-com-tests-generic-containerid" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A test used to check what is the id of the crio generated container this command is run from</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cat</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-generic-version">
+<h3>http://test-network-function.com/tests/generic/version<a class="headerlink" href="#http-test-network-function-com-tests-generic-version" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to determine if a target container/machine is based on RHEL.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cat</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-graceperiod">
+<h3>http://test-network-function.com/tests/gracePeriod<a class="headerlink" href="#http-test-network-function-com-tests-graceperiod" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to extract the CNF pod’s terminationGracePeriod.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grep</span></code>, <code class="docutils literal notranslate"><span class="pre">cut</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-grubkernelcmdlineargs">
+<h3>http://test-network-function.com/tests/grubKernelCmdlineArgs<a class="headerlink" href="#http-test-network-function-com-tests-grubkernelcmdlineargs" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to get node’s next boot kernel args</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">cut</span></code>, <code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-hostname">
+<h3>http://test-network-function.com/tests/hostname<a class="headerlink" href="#http-test-network-function-com-tests-hostname" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to check the hostname of a target machine/container.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hostname</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-hugepages">
+<h3>http://test-network-function.com/tests/hugepages<a class="headerlink" href="#http-test-network-function-com-tests-hugepages" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to read cluster’s hugepages configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grep</span></code>, <code class="docutils literal notranslate"><span class="pre">cut</span></code>, <code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-ipaddr">
+<h3>http://test-network-function.com/tests/ipaddr<a class="headerlink" href="#http-test-network-function-com-tests-ipaddr" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to derive the default network interface IP address of a target container.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ip</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-logging">
+<h3>http://test-network-function.com/tests/logging<a class="headerlink" href="#http-test-network-function-com-tests-logging" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A test used to check logs are redirected to stderr/stdout</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">wc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-mckernelarguments">
+<h3>http://test-network-function.com/tests/mckernelarguments<a class="headerlink" href="#http-test-network-function-com-tests-mckernelarguments" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to get an mc’s kernel arguments</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">jq</span></code>, <code class="docutils literal notranslate"><span class="pre">echo</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-node-uncordon">
+<h3>http://test-network-function.com/tests/node/uncordon<a class="headerlink" href="#http-test-network-function-com-tests-node-uncordon" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to uncordon a node</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-nodedebug">
+<h3>http://test-network-function.com/tests/nodedebug<a class="headerlink" href="#http-test-network-function-com-tests-nodedebug" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to execute a command in a node</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">echo</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-nodehugepages">
+<h3>http://test-network-function.com/tests/nodehugepages<a class="headerlink" href="#http-test-network-function-com-tests-nodehugepages" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to verify a node’s hugepages configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-nodemcname">
+<h3>http://test-network-function.com/tests/nodemcname<a class="headerlink" href="#http-test-network-function-com-tests-nodemcname" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to get a node’s current mc</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-nodenames">
+<h3>http://test-network-function.com/tests/nodenames<a class="headerlink" href="#http-test-network-function-com-tests-nodenames" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to get node names</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-nodeport">
+<h3>http://test-network-function.com/tests/nodeport<a class="headerlink" href="#http-test-network-function-com-tests-nodeport" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to test services of CNF pod’s namespace.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-nodes">
+<h3>http://test-network-function.com/tests/nodes<a class="headerlink" href="#http-test-network-function-com-tests-nodes" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>Polls the state of the OpenShift cluster nodes using “oc get nodes -o json”.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>http://test-network-function.com/tests/nodehugepages<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to verify a pod’s nodeSelector and nodeAffinity configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">grep</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-nodetainted">
+<h3>http://test-network-function.com/tests/nodetainted<a class="headerlink" href="#http-test-network-function-com-tests-nodetainted" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to test whether node is tainted</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code>, <code class="docutils literal notranslate"><span class="pre">cat</span></code>, <code class="docutils literal notranslate"><span class="pre">echo</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-operator">
+<h3>http://test-network-function.com/tests/operator<a class="headerlink" href="#http-test-network-function-com-tests-operator" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>An operator-specific test used to exercise the behavior of a given operator.  In the current offering, we check if the operator ClusterServiceVersion (CSV) is installed properly.  A CSV is a YAML manifest created from Operator metadata that assists the Operator Lifecycle Manager (OLM) in running the Operator.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jq</span></code>, <code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-operator-check-subscription">
+<h3>http://test-network-function.com/tests/operator/check-subscription<a class="headerlink" href="#http-test-network-function-com-tests-operator-check-subscription" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A test used to check the subscription of a given operator</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-owners">
+<h3>http://test-network-function.com/tests/owners<a class="headerlink" href="#http-test-network-function-com-tests-owners" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to verify pod is managed by a ReplicaSet</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cat</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-ping">
+<h3>http://test-network-function.com/tests/ping<a class="headerlink" href="#http-test-network-function-com-tests-ping" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to test ICMP connectivity from a source machine/container to a target destination.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ping</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-podnodename">
+<h3>http://test-network-function.com/tests/podnodename<a class="headerlink" href="#http-test-network-function-com-tests-podnodename" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to get a pod’s node</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-readremotefile">
+<h3>http://test-network-function.com/tests/readRemoteFile<a class="headerlink" href="#http-test-network-function-com-tests-readremotefile" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to read a specified file at a specified node</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">echo</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-rolebinding">
+<h3>http://test-network-function.com/tests/rolebinding<a class="headerlink" href="#http-test-network-function-com-tests-rolebinding" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to test RoleBindings of CNF pod’s ServiceAccount.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cat</span></code>, <code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-scaling">
+<h3>http://test-network-function.com/tests/scaling<a class="headerlink" href="#http-test-network-function-com-tests-scaling" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A test to check the deployments scale in/out. The tests issues the oc scale command on a deployment for a given number of replicas and checks whether the command output is valid.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-serviceaccount">
+<h3>http://test-network-function.com/tests/serviceaccount<a class="headerlink" href="#http-test-network-function-com-tests-serviceaccount" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to extract the CNF pod’s ServiceAccount name.</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">grep</span></code>, <code class="docutils literal notranslate"><span class="pre">cut</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-shutdown">
+<h3>http://test-network-function.com/tests/shutdown<a class="headerlink" href="#http-test-network-function-com-tests-shutdown" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A test used to check pre-stop lifecycle is defined</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-sysctlallconfigsargs">
+<h3>http://test-network-function.com/tests/sysctlAllConfigsArgs<a class="headerlink" href="#http-test-network-function-com-tests-sysctlallconfigsargs" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A test used to find all sysctl configuration args</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sysctl</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-sysctlconfigfileslist">
+<h3>http://test-network-function.com/tests/sysctlConfigFilesList<a class="headerlink" href="#http-test-network-function-com-tests-sysctlconfigfileslist" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to get node’s list of sysctl config files</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cat</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="http-test-network-function-com-tests-testpodhighavailability">
+<h3>http://test-network-function.com/tests/testPodHighAvailability<a class="headerlink" href="#http-test-network-function-com-tests-testpodhighavailability" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>v1.0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Description</p></td>
+<td><p>A generic test used to check pod’s replica and podAntiAffinity configuration in high availability mode</p></td>
+</tr>
+<tr class="row-even"><td><p>Result Type</p></td>
+<td><p>normative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intrusive</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p>Modifications Persist After Test</p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime Binaries Required</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oc</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, test-network-function.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
