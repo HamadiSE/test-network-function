@@ -22,6 +22,7 @@ import (
 	"regexp"
 	"strings"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/test-network-function/test-network-function/pkg/config"
 	"github.com/test-network-function/test-network-function/pkg/tnf/testcases"
 
@@ -317,6 +318,7 @@ func testTainted() {
 			gomega.Expect(testResult).NotTo(gomega.Equal(tnf.ERROR))
 			gomega.Expect(err).To(gomega.BeNil())
 			if testResult == tnf.FAILURE {
+				log.Errorf("node %s has tainted kernel", node)
 				taintedNodes = append(taintedNodes, node)
 			}
 		}

@@ -23,13 +23,10 @@ import (
 )
 
 const (
-	ocClientCommandSeparator = "--"
-	ocCommand                = "oc"
-	ocContainerArg           = "-c"
-	ocDefaultShell           = "sh"
-	ocExecCommand            = "exec"
-	ocNamespaceArg           = "-n"
-	ocInteractiveArg         = "-it"
+	ocCommand      = "oc"
+	ocContainerArg = "-c"
+	ocRshCommand   = "rsh"
+	ocNamespaceArg = "-n"
 )
 
 // Oc provides an OpenShift Client designed to wrap the "oc" CLI.
@@ -44,7 +41,7 @@ type Oc struct {
 	serviceAccountName string
 	// timeout for commands run in expecter
 	timeout time.Duration
-	// options for experter, such as expect.Verbose(true)
+	// options for expecter, such as expect.Verbose(true)
 	opts []Option
 	// the underlying subprocess implementation, tailored to OpenShift Client
 	expecter *expect.Expecter
@@ -56,7 +53,7 @@ type Oc struct {
 
 // SpawnOc creates an OpenShift Client subprocess, spawning the appropriate underlying PTY.
 func SpawnOc(spawner *Spawner, pod, container, namespace string, timeout time.Duration, opts ...Option) (*Oc, <-chan error, error) {
-	ocArgs := []string{ocExecCommand, ocNamespaceArg, namespace, ocInteractiveArg, pod, ocContainerArg, container, ocClientCommandSeparator, ocDefaultShell}
+	ocArgs := []string{ocRshCommand, ocNamespaceArg, namespace, ocContainerArg, container, pod}
 	context, err := (*spawner).Spawn(ocCommand, ocArgs, timeout, opts...)
 	if err != nil {
 		return nil, context.GetErrorChannel(), err

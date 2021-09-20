@@ -82,6 +82,7 @@ func (e *ExecSpawnFunc) Wait() error {
 
 // Start wraps exec.Cmd.Start.
 func (e *ExecSpawnFunc) Start() error {
+	log.Debug("Spawn Shell ", e.cmd.Args)
 	return e.cmd.Start()
 }
 
