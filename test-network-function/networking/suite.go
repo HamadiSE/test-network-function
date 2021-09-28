@@ -82,13 +82,13 @@ func testDefaultNetworkConnectivity(env *config.TestEnvironment, count int) {
 				}
 				context := cut.Oc
 				testOrchestrator := env.TestOrchestrator
-				ginkgo.By(fmt.Sprintf("a Ping is issued from %s(%s) to %s(%s) %s", testOrchestrator.Oc.GetPodName(),
-					testOrchestrator.Oc.GetPodContainerName(), cut.Oc.GetPodName(), cut.Oc.GetPodContainerName(),
+				ginkgo.By(fmt.Sprintf("a Ping is issued from %s(%s) to %s(%s) %s", testOrchestrator.Oc.GetId(),
+					testOrchestrator.Oc.GetPodContainerName(), cut.Oc.GetId(), cut.Oc.GetPodContainerName(),
 					cut.DefaultNetworkIPAddress))
 				defer results.RecordResult(identifiers.TestICMPv4ConnectivityIdentifier)
 				testPing(testOrchestrator.Oc, cut.DefaultNetworkIPAddress, count)
-				ginkgo.By(fmt.Sprintf("a Ping is issued from %s(%s) to %s(%s) %s", cut.Oc.GetPodName(),
-					cut.Oc.GetPodContainerName(), testOrchestrator.Oc.GetPodName(), testOrchestrator.Oc.GetPodContainerName(),
+				ginkgo.By(fmt.Sprintf("a Ping is issued from %s(%s) to %s(%s) %s", cut.Oc.GetId(),
+					cut.Oc.GetPodContainerName(), testOrchestrator.Oc.GetId(), testOrchestrator.Oc.GetPodContainerName(),
 					testOrchestrator.DefaultNetworkIPAddress))
 				testPing(context, testOrchestrator.DefaultNetworkIPAddress, count)
 			}
@@ -109,8 +109,8 @@ func testMultusNetworkConnectivity(env *config.TestEnvironment, count int) {
 				}
 				for _, multusIPAddress := range cut.ContainerConfiguration.MultusIPAddresses {
 					testOrchestrator := env.TestOrchestrator
-					ginkgo.By(fmt.Sprintf("a Ping is issued from %s(%s) to %s(%s) %s", testOrchestrator.Oc.GetPodName(),
-						testOrchestrator.Oc.GetPodContainerName(), cut.Oc.GetPodName(), cut.Oc.GetPodContainerName(),
+					ginkgo.By(fmt.Sprintf("a Ping is issued from %s(%s) to %s(%s) %s", testOrchestrator.Oc.GetId(),
+						testOrchestrator.Oc.GetPodContainerName(), cut.Oc.GetId(), cut.Oc.GetPodContainerName(),
 						cut.DefaultNetworkIPAddress))
 					defer results.RecordResult(identifiers.TestICMPv4ConnectivityIdentifier)
 					testPing(testOrchestrator.Oc, multusIPAddress, count)
@@ -122,7 +122,7 @@ func testMultusNetworkConnectivity(env *config.TestEnvironment, count int) {
 
 // Test that a container can ping a target IP address.
 func testPing(initiatingPodOc *interactive.Oc, targetPodIPAddress string, count int) {
-	log.Infof("Sending ICMP traffic(%s to %s)", initiatingPodOc.GetPodName(), targetPodIPAddress)
+	log.Infof("Sending ICMP traffic(%s to %s)", initiatingPodOc.GetId(), targetPodIPAddress)
 	pingTester := ping.NewPing(common.DefaultTimeout, targetPodIPAddress, count)
 	test, err := tnf.NewTest(initiatingPodOc.GetExpecter(), pingTester, []reel.Handler{pingTester}, initiatingPodOc.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())

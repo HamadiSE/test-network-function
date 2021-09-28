@@ -64,6 +64,13 @@ type Container struct {
 	ContainerIdentifier     configsections.ContainerIdentifier
 }
 
+type NodeConfig struct {
+	Oc     *interactive.Oc
+	Name   string
+	Worker bool
+	Master bool
+}
+
 // DefaultTimeout for creating new interactive sessions (oc, ssh, tty)
 var DefaultTimeout = time.Duration(defaultTimeoutSeconds) * time.Second
 
@@ -87,7 +94,7 @@ func getOcSession(pod, container, namespace string, timeout time.Duration, optio
 			for {
 				select {
 				case err := <-outCh:
-					log.Fatalf("OC session to container %s/%s is broken due to: %v, aborting the test run", oc.GetPodName(), oc.GetPodContainerName(), err)
+					log.Fatalf("OC session to element %s/%s is broken due to: %v, aborting the test run", oc.GetId(), oc.GetPodContainerName(), err)
 					os.Exit(1)
 				case <-oc.GetDoneChannel():
 					break
@@ -104,10 +111,47 @@ func getOcSession(pod, container, namespace string, timeout time.Duration, optio
 	return containerOc
 }
 
+// Helper used to instantiate an OpenShift Client Session.
+func getOcNodeSession(node string, timeout time.Duration, options ...interactive.Option) *interactive.Oc {
+	// Spawn an interactive OC shell using a goroutine (needed to avoid cross expect.Expecter interaction).  Extract the
+	// Oc reference from the goroutine through a channel.  Performs basic sanity checking that the Oc session is set up
+	// correctly.
+	var nodeOc *interactive.Oc
+	ocChan := make(chan *interactive.Oc)
+
+	goExpectSpawner := interactive.NewGoExpectSpawner()
+	var spawner interactive.Spawner = goExpectSpawner
+
+	go func() {
+		oc, outCh, err := interactive.SpawnNodeOc(&spawner, node, timeout, options...)
+		gomega.Expect(outCh).ToNot(gomega.BeNil())
+		gomega.Expect(err).To(gomega.BeNil())
+		// Set up a go routine which reads from the error channel
+		go func() {
+			for {
+				select {
+				case err := <-outCh:
+					log.Fatalf("OC session to node %s is broken due to: %v, aborting the test run", oc.GetId(), err)
+					os.Exit(1)
+				case <-oc.GetDoneChannel():
+					break
+				}
+			}
+		}()
+		ocChan <- oc
+	}()
+
+	nodeOc = <-ocChan
+
+	gomega.Expect(nodeOc).ToNot(gomega.BeNil())
+
+	return nodeOc
+}
+
 // Extract a container IP address for a particular device.  This is needed since container default network IP address
 // is served by dhcp, and thus is ephemeral.
 func getContainerDefaultNetworkIPAddress(oc *interactive.Oc, dev string) (string, error) {
-	log.Infof("Getting IP Information for: %s(%s) in ns=%s", oc.GetPodName(), oc.GetPodContainerName(), oc.GetPodNamespace())
+	log.Infof("Getting IP Information for: %s(%s) in ns=%s", oc.GetId(), oc.GetPodContainerName(), oc.GetNamespace())
 	ipTester := ipaddr.NewIPAddr(DefaultTimeout, dev)
 	test, err := tnf.NewTest(oc.GetExpecter(), ipTester, []reel.Handler{ipTester}, oc.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())
@@ -116,7 +160,7 @@ func getContainerDefaultNetworkIPAddress(oc *interactive.Oc, dev string) (string
 		return ipTester.GetIPv4Address(), nil
 	}
 	return "", fmt.Errorf("failed to get IP information for %s(%s) in ns=%s, result=%v, err=%v",
-		oc.GetPodName(), oc.GetPodContainerName(), oc.GetPodNamespace(), result, err)
+		oc.GetId(), oc.GetPodContainerName(), oc.GetNamespace(), result, err)
 }
 
 // TestEnvironment includes the representation of the current state of the test targets and parters as well as the test configuration
@@ -126,6 +170,7 @@ type TestEnvironment struct {
 	PodsUnderTest        []configsections.Pod
 	DeploymentsUnderTest []configsections.Deployment
 	OperatorsUnderTest   []configsections.Operator
+	NodesUnderTest       map[string]*NodeConfig
 	NameSpaceUnderTest   string
 	// ContainersToExcludeFromConnectivityTests is a set used for storing the containers that should be excluded from
 	// connectivity testing.
@@ -199,9 +244,27 @@ func (env *TestEnvironment) doAutodiscover() {
 	env.TestOrchestrator = env.PartnerContainers[env.Config.Partner.TestOrchestratorID]
 	env.DeploymentsUnderTest = env.Config.DeploymentsUnderTest
 	env.OperatorsUnderTest = env.Config.Operators
+	env.NodesUnderTest = env.createNodes(env.Config.NodesUnderTest)
 	log.Info(env.TestOrchestrator)
 	log.Info(env.ContainersUnderTest)
 	env.needsRefresh = false
+}
+
+func (env *TestEnvironment) createNodes(nodesDefinitions []configsections.Node) map[string]*NodeConfig {
+	nodes := make(map[string]*NodeConfig)
+	for _, n := range nodesDefinitions {
+		oc := getOcNodeSession(n.Name, DefaultTimeout, interactive.Verbose(true), interactive.SendTimeout(DefaultTimeout))
+		nodes[n.Name] = &NodeConfig{
+			Name:   n.Name,
+			Worker: n.Worker,
+			Master: n.Master,
+			Oc:     oc,
+		}
+	}
+
+	time.Sleep(20 * time.Second)
+	time.Sleep(20 * time.Second)
+	return nodes
 }
 
 // createContainers contains the general steps involved in creating "oc" sessions and other configuration. A map of the

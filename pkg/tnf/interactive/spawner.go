@@ -299,7 +299,7 @@ func logCmdMirrorPipe(cmdLine string, pipeToMirror io.Reader, name string, trace
 			}
 			if err != nil {
 				// Some Error has happened, goroutine about to exit
-				log.Warnf("Exiting cmd log mirroring goroutine. Error: %s", err)
+				log.Errorf("%s  Exiting cmd log mirroring goroutine. Error: %s", cmdLine, err)
 				return
 			}
 		}

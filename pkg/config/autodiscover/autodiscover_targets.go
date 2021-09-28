@@ -17,14 +17,24 @@
 package autodiscover
 
 import (
+	"errors"
+	"time"
+
+	"github.com/onsi/gomega"
 	log "github.com/sirupsen/logrus"
 	"github.com/test-network-function/test-network-function/pkg/config/configsections"
+	"github.com/test-network-function/test-network-function/pkg/tnf"
+	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/nodenames"
+	"github.com/test-network-function/test-network-function/pkg/tnf/reel"
 	"github.com/test-network-function/test-network-function/pkg/tnf/testcases"
+	"github.com/test-network-function/test-network-function/test-network-function/common"
 )
 
 const (
 	operatorLabelName          = "operator"
 	skipConnectivityTestsLabel = "skip_connectivity_tests"
+	masterNodeLabel            = "node-role.kubernetes.io/master"
+	workerNodeLabel            = "node-role.kubernetes.io/worker"
 )
 
 var (
@@ -66,6 +76,11 @@ func FindTestTarget(labels []configsections.Label, target *configsections.TestTa
 	}
 
 	target.DeploymentsUnderTest = append(target.DeploymentsUnderTest, FindTestDeployments(labels, target, namespace)...)
+
+	err = findNodesUnderTest(target)
+	if err != nil {
+		log.Panic("can't find nodes under test")
+	}
 }
 
 // FindTestDeployments uses the containers' namespace to get its parent deployment. Filters out non CNF test deployments,
@@ -146,4 +161,55 @@ func getConfiguredOperatorTests() (opTests []string) {
 	}
 	log.WithField("opTests", opTests).Infof("got all tests from %s.", testcases.ConfiguredTestFile)
 	return opTests
+}
+
+// findNodesUnderTest fill the configsections.TestTarget with nodes under test
+func findNodesUnderTest(target *configsections.TestTarget) error {
+	nodes := findnodes()
+	if len(nodes) == 0 {
+		return errors.New("no nodes found")
+	}
+	for _, node := range nodes {
+		target.NodesUnderTest = append(target.NodesUnderTest, *node)
+	}
+
+	return nil
+}
+
+// FindNodesUnderTest finds master and worker nodes in the cluster
+// a node can be master/worker or both
+func findnodes() map[string]*configsections.Node {
+	nodes := make(map[string]*configsections.Node)
+	context := common.GetContext()
+	// get master nodes
+	tester := nodenames.NewNodeNames(10*time.Second, map[string]*string{masterNodeLabel: nil})
+	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
+	gomega.Expect(err).To(gomega.BeNil())
+	testResult, err := test.Run()
+	gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
+	gomega.Expect(err).To(gomega.BeNil())
+	nodeNames := tester.GetNodeNames()
+	gomega.Expect(nodeNames).NotTo(gomega.BeEmpty())
+	for _, n := range nodeNames {
+		node := configsections.Node{Name: n, Master: true, Worker: false}
+		nodes[n] = &node
+	}
+	// get master nodes
+	tester = nodenames.NewNodeNames(10*time.Second, map[string]*string{workerNodeLabel: nil})
+	test, err = tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
+	gomega.Expect(err).To(gomega.BeNil())
+	testResult, err = test.Run()
+	gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
+	gomega.Expect(err).To(gomega.BeNil())
+	nodeNames = tester.GetNodeNames()
+	gomega.Expect(nodeNames).NotTo(gomega.BeEmpty())
+	for _, n := range nodeNames {
+		if _, ok := nodes[n]; ok {
+			nodes[n].Worker = true
+		} else {
+			node := configsections.Node{Name: n, Master: false, Worker: true}
+			nodes[n] = &node
+		}
+	}
+	return nodes
 }

@@ -88,7 +88,7 @@ func testIsRedHatRelease(env *config.TestEnvironment) {
 
 // testContainerIsRedHatRelease tests whether the container attached to oc is Red Hat based.
 func testContainerIsRedHatRelease(cut *config.Container) {
-	podName := cut.Oc.GetPodName()
+	podName := cut.Oc.GetId()
 	containerName := cut.Oc.GetPodContainerName()
 	context := cut.Oc
 	ginkgo.By(fmt.Sprintf("%s(%s) is checked for Red Hat version", podName, containerName))
@@ -107,7 +107,7 @@ func testContainersFsDiff(env *config.TestEnvironment) {
 		ginkgo.It(testID, func() {
 			var badContainers []string
 			for _, cut := range env.ContainersUnderTest {
-				podName := cut.Oc.GetPodName()
+				podName := cut.Oc.GetId()
 				containerName := cut.Oc.GetPodContainerName()
 				context := cut.Oc
 				nodeName := cut.ContainerConfiguration.NodeName
@@ -238,8 +238,8 @@ func testBootParams(env *config.TestEnvironment) {
 	ginkgo.It(testID, func() {
 		context := common.GetContext()
 		for _, cut := range env.ContainersUnderTest {
-			podName := cut.Oc.GetPodName()
-			podNameSpace := cut.Oc.GetPodNamespace()
+			podName := cut.Oc.GetId()
+			podNameSpace := cut.Oc.GetNamespace()
 			targetContainerOc := cut.Oc
 			testBootParamsHelper(context, podName, podNameSpace, targetContainerOc)
 		}

@@ -34,7 +34,6 @@ import (
 	"github.com/test-network-function/test-network-function/pkg/config"
 	"github.com/test-network-function/test-network-function/pkg/junit"
 	"github.com/test-network-function/test-network-function/pkg/tnf"
-	tnfcommon "github.com/test-network-function/test-network-function/pkg/tnf/handlers/common"
 
 	_ "github.com/test-network-function/test-network-function/test-network-function/accesscontrol"
 	_ "github.com/test-network-function/test-network-function/test-network-function/certification"
@@ -117,7 +116,6 @@ func TestTest(t *testing.T) {
 	common.SetLogFormat()
 	common.SetLogLevel()
 	log.Info("Version: ", programVersion, " ( ", GitCommit, " )")
-	tnfcommon.OcDebugImageID = common.GetOcDebugImageID()
 
 	// Initialize the claim with the start time, tnf version, etc.
 	claimRoot := createClaimRoot()

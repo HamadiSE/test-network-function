@@ -21,7 +21,6 @@ import (
 	"time"
 
 	"github.com/test-network-function/test-network-function/pkg/tnf"
-	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/common"
 	"github.com/test-network-function/test-network-function/pkg/tnf/identifier"
 	"github.com/test-network-function/test-network-function/pkg/tnf/reel"
 )
@@ -41,6 +40,11 @@ type NodeDebug struct {
 	Processed []string // output after splitting and trimming. nil if !split&&!trim
 }
 
+func wrap(command string) string {
+	prefix := "chroot /host /bin/bash -c "
+	return prefix + "\"" + command + "\""
+}
+
 // NewNodeDebug creates a new NodeDebug tnf.Test.
 // command: caller handles escaping and preparing for shell execution
 //          empty output indicates error - make sure you always print something
@@ -51,7 +55,7 @@ func NewNodeDebug(timeout time.Duration, nodeName, command string, trim, split b
 		timeout: timeout,
 		result:  tnf.ERROR,
 		args: []string{
-			"echo", "-e", "\"chroot /host\n\"", command, "|", common.GetOcDebugCommand(), "node/" + nodeName,
+			wrap(command),
 		},
 		Trim:  trim,
 		Split: split,

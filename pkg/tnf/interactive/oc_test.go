@@ -34,7 +34,7 @@ const (
 var errSpawnOC = errors.New("some error related to spawning OC")
 
 type ocTestCase struct {
-	podName            string
+	id                 string
 	podContainerName   string
 	podNamespace       string
 	options            []interactive.Option
@@ -45,7 +45,7 @@ type ocTestCase struct {
 
 var ocTestCases = map[string]ocTestCase{
 	"no_error": {
-		podName:            "test",
+		id:                 "test",
 		podContainerName:   "test",
 		podNamespace:       "default",
 		options:            []interactive.Option{interactive.Verbose(true)},
@@ -54,7 +54,7 @@ var ocTestCases = map[string]ocTestCase{
 		expectedSpawnErr:   nil,
 	},
 	"error": {
-		podName:            "test",
+		id:                 "test",
 		podContainerName:   "testPod",
 		podNamespace:       "default",
 		options:            []interactive.Option{interactive.Verbose(true)},
@@ -74,12 +74,12 @@ func TestSpawnOc(t *testing.T) {
 		mockSpawner.EXPECT().Spawn(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(testCase.contextReturnValue, testCase.errReturnValue)
 
 		var spawner interactive.Spawner = mockSpawner
-		oc, _, err := interactive.SpawnOc(&spawner, testCase.podName, testCase.podContainerName, testCase.podNamespace, ocTestTimeoutDuration, testCase.options...)
+		oc, _, err := interactive.SpawnOc(&spawner, testCase.id, testCase.podContainerName, testCase.podNamespace, ocTestTimeoutDuration, testCase.options...)
 		assert.Equal(t, testCase.expectedSpawnErr, err)
 		if testCase.expectedSpawnErr == nil {
-			assert.Equal(t, testCase.podName, oc.GetPodName())
+			assert.Equal(t, testCase.id, oc.GetId())
 			assert.Equal(t, testCase.podContainerName, oc.GetPodContainerName())
-			assert.Equal(t, testCase.podNamespace, oc.GetPodNamespace())
+			assert.Equal(t, testCase.podNamespace, oc.GetNamespace())
 			assert.Equal(t, ocTestTimeoutDuration, oc.GetTimeout())
 			assert.Nil(t, oc.GetErrorChannel())
 			assert.Nil(t, oc.GetExpecter())

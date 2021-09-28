@@ -13,6 +13,7 @@ import (
 	"github.com/onsi/ginkgo"
 	ginkgoconfig "github.com/onsi/ginkgo/config"
 	"github.com/onsi/gomega"
+	"github.com/test-network-function/test-network-function/pkg/config"
 	"github.com/test-network-function/test-network-function/pkg/tnf"
 	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/clusterversion"
 	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/generic"
@@ -67,6 +68,12 @@ var (
 
 var _ = ginkgo.Describe(common.DiagnosticTestKey, func() {
 	if testcases.IsInFocus(ginkgoconfig.GinkgoConfig.FocusStrings, common.DiagnosticTestKey) {
+		env := config.GetTestEnvironment()
+		ginkgo.BeforeEach(func() {
+			env.LoadAndRefresh()
+			gomega.Expect(len(env.PodsUnderTest)).ToNot(gomega.Equal(0))
+			gomega.Expect(len(env.ContainersUnderTest)).ToNot(gomega.Equal(0))
+		})
 		ginkgo.When("a cluster is set up and installed with OpenShift", func() {
 
 			ginkgo.By("should report OCP version")
@@ -186,19 +193,21 @@ func getFirstNode(labelFilter map[string]*string) string {
 }
 
 func getMasterNodeName() string {
-	const masterNodeLabel = "node-role.kubernetes.io/master"
-	return getFirstNode(map[string]*string{masterNodeLabel: nil})
+	//const masterNodeLabel = "node-role.kubernetes.io/master"
+	//return getFirstNode(map[string]*string{masterNodeLabel: nil})
+	return "dhcp-55-220.lab.eng.tlv2.redhat.com"
 }
 
 func getWorkerNodeName() string {
-	const workerNodeLabel = "node-role.kubernetes.io/worker"
-	return getFirstNode(map[string]*string{workerNodeLabel: nil})
+	//const workerNodeLabel = "node-role.kubernetes.io/worker"
+	//return getFirstNode(map[string]*string{workerNodeLabel: nil})
+	return "dhcp-55-245.lab.eng.tlv2.redhat.com"
 }
 
 func listNodeCniPlugins(nodeName string) []CniPlugin {
-	const command = "jq -r .name,.cniVersion '/etc/cni/net.d/*'"
-	result := []CniPlugin{}
-	context := common.GetContext()
+	const command = "jq -r .name,.cniVersion /etc/cni/net.d/*"
+	env := config.GetTestEnvironment()
+	context := env.NodesUnderTest[nodeName].Oc
 	tester := nodedebug.NewNodeDebug(defaultTestTimeout, nodeName, command, true, true)
 	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())
@@ -206,6 +215,7 @@ func listNodeCniPlugins(nodeName string) []CniPlugin {
 	gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
 	gomega.Expect(err).To(gomega.BeNil())
 	gomega.Expect(len(tester.Processed)%2 == 0).To(gomega.BeTrue())
+	result := []CniPlugin{}
 	for i := 0; i < len(tester.Processed); i += 2 {
 		result = append(result, CniPlugin{
 			tester.Processed[i],
@@ -248,21 +258,22 @@ func testNodesHwInfo() {
 	workerNodeName := getWorkerNodeName()
 	gomega.Expect(workerNodeName).ToNot(gomega.BeEmpty())
 	nodesHwInfo.Master.NodeName = masterNodeName
-	nodesHwInfo.Master.Lscpu = getNodeLscpu(masterNodeName)
-	nodesHwInfo.Master.Ifconfig = getNodeIfconfig(masterNodeName)
-	nodesHwInfo.Master.Lsblk = getNodeLsblk(masterNodeName)
-	nodesHwInfo.Master.Lspci = getNodeLspci(masterNodeName)
 	nodesHwInfo.Worker.NodeName = workerNodeName
+	nodesHwInfo.Master.Lscpu = getNodeLscpu(masterNodeName)
 	nodesHwInfo.Worker.Lscpu = getNodeLscpu(workerNodeName)
+	nodesHwInfo.Master.Ifconfig = getNodeIfconfig(masterNodeName)
 	nodesHwInfo.Worker.Ifconfig = getNodeIfconfig(workerNodeName)
+	nodesHwInfo.Master.Lsblk = getNodeLsblk(masterNodeName)
 	nodesHwInfo.Worker.Lsblk = getNodeLsblk(workerNodeName)
+	nodesHwInfo.Master.Lspci = getNodeLspci(masterNodeName)
 	nodesHwInfo.Worker.Lspci = getNodeLspci(workerNodeName)
 }
 
 func getNodeLscpu(nodeName string) map[string]string {
 	const command = "lscpu"
 	result := map[string]string{}
-	context := common.GetContext()
+	env := config.GetTestEnvironment()
+	context := env.NodesUnderTest[nodeName].Oc
 	tester := nodedebug.NewNodeDebug(defaultTestTimeout, nodeName, command, true, true)
 	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())
@@ -279,7 +290,8 @@ func getNodeLscpu(nodeName string) map[string]string {
 func getNodeIfconfig(nodeName string) map[string][]string {
 	const command = "ifconfig"
 	result := map[string][]string{}
-	context := common.GetContext()
+	env := config.GetTestEnvironment()
+	context := env.NodesUnderTest[nodeName].Oc
 	tester := nodedebug.NewNodeDebug(defaultTestTimeout, nodeName, command, true, true)
 	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())
@@ -303,7 +315,8 @@ func getNodeIfconfig(nodeName string) map[string][]string {
 
 func getNodeLsblk(nodeName string) interface{} {
 	const command = "lsblk -J"
-	context := common.GetContext()
+	env := config.GetTestEnvironment()
+	context := env.NodesUnderTest[nodeName].Oc
 	tester := nodedebug.NewNodeDebug(defaultTestTimeout, nodeName, command, false, false)
 	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())
@@ -318,7 +331,8 @@ func getNodeLsblk(nodeName string) interface{} {
 
 func getNodeLspci(nodeName string) []string {
 	const command = "lspci"
-	context := common.GetContext()
+	env := config.GetTestEnvironment()
+	context := env.NodesUnderTest[nodeName].Oc
 	tester := nodedebug.NewNodeDebug(defaultTestTimeout, nodeName, command, true, true)
 	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())

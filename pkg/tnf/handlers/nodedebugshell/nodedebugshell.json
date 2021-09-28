@@ -1,0 +1,20 @@
+{
+  "identifier" : {
+    "url" :  "http://test-network-function.com/tests/nodedebugshell",
+    "version": "v1.0.0"
+  },
+  "description": "Enable debug shell session",
+  "testResult": 0,
+  "testTimeout": 5000000000,
+  "reelFirstStep": {
+    "execute": "chroot /host ",
+    "expect":[ "(?m).*"],
+    "timeout": 5000000000
+  },
+  "resultContexts":[
+    {
+      "pattern": "(?m).*",
+      "defaultResult": 1
+    }
+  ]
+}
