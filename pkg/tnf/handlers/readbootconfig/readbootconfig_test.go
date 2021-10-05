@@ -28,13 +28,13 @@ import (
 )
 
 func TestReadBootConfig(t *testing.T) {
-	newReadBootConfig := readbootconfig.NewReadBootConfig(testTimeoutDuration, testNodeName)
+	newReadBootConfig := readbootconfig.NewReadBootConfig(testTimeoutDuration)
 	assert.NotNil(t, newReadBootConfig)
 	assert.Equal(t, tnf.ERROR, newReadBootConfig.Result())
 }
 
 func Test_ReelFirst(t *testing.T) {
-	newReadBootConfig := readbootconfig.NewReadBootConfig(testTimeoutDuration, testNodeName)
+	newReadBootConfig := readbootconfig.NewReadBootConfig(testTimeoutDuration)
 	assert.NotNil(t, newReadBootConfig)
 	firstStep := newReadBootConfig.ReelFirst()
 	re := regexp.MustCompile(firstStep.Expect[0])
@@ -44,7 +44,7 @@ func Test_ReelFirst(t *testing.T) {
 }
 
 func Test_ReelMatch(t *testing.T) {
-	newBootConfig := bootconfigentries.NewBootConfigEntries(testTimeoutDuration, testNodeName)
+	newBootConfig := bootconfigentries.NewBootConfigEntries(testTimeoutDuration)
 	assert.NotNil(t, newBootConfig)
 	step := newBootConfig.ReelMatch("", "", testInput)
 	assert.Nil(t, step)
@@ -53,7 +53,7 @@ func Test_ReelMatch(t *testing.T) {
 
 // Just ensure there are no panics.
 func Test_ReelEof(t *testing.T) {
-	newBootConfig := bootconfigentries.NewBootConfigEntries(testTimeoutDuration, testNodeName)
+	newBootConfig := bootconfigentries.NewBootConfigEntries(testTimeoutDuration)
 	assert.NotNil(t, newBootConfig)
 	newBootConfig.ReelEOF()
 }

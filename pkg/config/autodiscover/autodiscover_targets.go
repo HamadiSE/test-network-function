@@ -26,7 +26,6 @@ import (
 	"github.com/test-network-function/test-network-function/pkg/tnf/interactive"
 	"github.com/test-network-function/test-network-function/pkg/tnf/reel"
 	"github.com/test-network-function/test-network-function/pkg/tnf/testcases"
-	"github.com/test-network-function/test-network-function/test-network-function/common"
 )
 
 const (
@@ -86,7 +85,7 @@ func GetNodesList() (nodes map[string]configsections.Node) {
 		log.Error("Unable to get context ", ". Error: ", err)
 		return
 	}
-	tester := nodenames.NewNodeNames(common.DefaultTimeout, map[string]*string{configsections.MasterLabel: nil})
+	tester := nodenames.NewNodeNames(DefaultTimeout, map[string]*string{configsections.MasterLabel: nil})
 	test, _ := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	_, err = test.Run()
 	if err != nil {
@@ -101,8 +100,7 @@ func GetNodesList() (nodes map[string]configsections.Node) {
 		}
 	}
 
-	context = common.GetContext()
-	tester = nodenames.NewNodeNames(common.DefaultTimeout, map[string]*string{configsections.WorkerLabel: nil})
+	tester = nodenames.NewNodeNames(DefaultTimeout, map[string]*string{configsections.WorkerLabel: nil})
 	test, _ = tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	_, err = test.Run()
 	if err != nil {

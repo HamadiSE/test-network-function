@@ -26,6 +26,8 @@ import (
 
 	"github.com/onsi/gomega"
 	log "github.com/sirupsen/logrus"
+	"github.com/test-network-function/test-network-function/pkg/config"
+	"github.com/test-network-function/test-network-function/pkg/tnf"
 	"github.com/test-network-function/test-network-function/pkg/tnf/interactive"
 )
 
@@ -50,6 +52,13 @@ func GetContext() *interactive.Context {
 	gomega.Expect(context).ToNot(gomega.BeNil())
 	gomega.Expect(context.GetExpecter()).ToNot(gomega.BeNil())
 	return context
+}
+
+// RunAndValidateTest runs the test and checks the result
+func RunAndValidateTest(test *tnf.Test) {
+	testResult, err := test.Run()
+	gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
+	gomega.Expect(err).To(gomega.BeNil())
 }
 
 // IsMinikube returns true when the env var is set, OCP only test would be skipped based on this flag
@@ -105,4 +114,45 @@ func SetLogFormat() {
 	}
 	log.SetFormatter(customFormatter)
 	log.Info("debug format initialization: done")
+}
+
+// TeardownNodeDebugSession closes the session opened with hosts
+//
+func TeardownNodeDebugSession() {
+	if IsMinikube() {
+		return
+	}
+	log.Info("test suite teardown: start")
+	env := config.GetTestEnvironment()
+	env.LoadAndRefresh()
+	//for _, node := range env.NodesUnderTest {
+	//	log.Info("send close session to ", node.Name)
+	//	if node.Oc != nil {
+	//		node.Oc.Close()
+	//	}
+	//}
+	//log.Info("sleep 5 second after closing the channel: start")
+	//time.Sleep(5 * time.Second)
+	//log.Info("sleep 5 second after closing the channel: done")
+	for _, node := range env.NodesUnderTest {
+		const command = "exit "
+		context := node.Oc
+		if context != nil {
+			node.Oc.Close()
+			time.Sleep(1 * time.Second)
+			log.Info("send exit command to node=", node.Name)
+			(*context.GetExpecter()).Send(command)
+		}
+	}
+	log.Info("time sleep")
+	//time.Sleep(10 * time.Second)
+	/*
+		context := GetContext()
+		(*context.GetExpecter()).Send("oc delete pod cnfdt12labengtlv2redhatcom-debug")
+		(*context.GetExpecter()).Send("oc delete pod dhcp-55-165labengtlv2redhatcom-debug")
+		(*context.GetExpecter()).Send("oc delete pod dhcp-55-214labengtlv2redhatcom-debug")
+		(*context.GetExpecter()).Send("oc delete pod dhcp-55-216labengtlv2redhatcom-debug")
+		(*context.GetExpecter()).Send("oc delete pod dhcp-55-220labengtlv2redhatcom-debug")
+	*/
+	log.Info("test suite teardown: done")
 }

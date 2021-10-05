@@ -19,6 +19,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/onsi/gomega"
@@ -63,6 +64,28 @@ type Container struct {
 	ContainerIdentifier     configsections.ContainerIdentifier
 }
 
+type NodeConfig struct {
+	// same Name as the one inside Node structure
+	Name string
+	Node configsections.Node
+	// Oc holds shell for debug pod running on the node
+	Oc *interactive.Oc
+	// deployment indicates if the node has a deployment
+	deployment bool
+}
+
+func (n NodeConfig) IsMaster() bool {
+	return n.Node.IsMaster()
+}
+
+func (n NodeConfig) IsWorker() bool {
+	return n.Node.IsWorker()
+}
+
+func (n NodeConfig) HasDeployment() bool {
+	return n.deployment
+}
+
 // DefaultTimeout for creating new interactive sessions (oc, ssh, tty)
 var DefaultTimeout = time.Duration(defaultTimeoutSeconds) * time.Second
 
@@ -87,9 +110,9 @@ func getOcSession(pod, container, namespace string, timeout time.Duration, optio
 				select {
 				case err := <-outCh:
 					log.Fatalf("OC session to container %s/%s is broken due to: %v, aborting the test run", oc.GetPodName(), oc.GetPodContainerName(), err)
-					os.Exit(1)
 				case <-oc.GetDoneChannel():
-					break
+					log.Infof("stop watching the session with container %s/%s", oc.GetPodName(), oc.GetPodContainerName())
+					return
 				}
 			}
 		}()
@@ -126,7 +149,7 @@ type TestEnvironment struct {
 	DeploymentsUnderTest []configsections.Deployment
 	OperatorsUnderTest   []configsections.Operator
 	NameSpaceUnderTest   string
-	Nodes                map[string]configsections.Node
+	NodesUnderTest       map[string]*NodeConfig
 
 	// ContainersToExcludeFromConnectivityTests is a set used for storing the containers that should be excluded from
 	// connectivity testing.
@@ -173,6 +196,8 @@ func (env *TestEnvironment) LoadAndRefresh() {
 		env.Config.Partner = configsections.TestPartner{}
 		env.Config.TestTarget = configsections.TestTarget{}
 		env.TestOrchestrator = nil
+		env.NodesUnderTest = nil
+		env.Config.Nodes = nil
 		env.doAutodiscover()
 	}
 }
@@ -198,10 +223,78 @@ func (env *TestEnvironment) doAutodiscover() {
 	env.TestOrchestrator = env.PartnerContainers[env.Config.Partner.TestOrchestratorID]
 	env.DeploymentsUnderTest = env.Config.DeploymentsUnderTest
 	env.OperatorsUnderTest = env.Config.Operators
-	env.Nodes = env.Config.Nodes
+	env.NodesUnderTest = env.createNodes()
 	log.Infof("Test Configuration: %+v", *env)
 
 	env.needsRefresh = false
+}
+
+// Helper used to instantiate an OpenShift Client Session.
+func getOcNodeSession(node, namespace string, timeout time.Duration, options ...interactive.Option) *interactive.Oc {
+	// Spawn an interactive OC shell using a goroutine (needed to avoid cross expect.Expecter interaction).  Extract the
+	// Oc reference from the goroutine through a channel.  Performs basic sanity checking that the Oc session is set up
+	// correctly.
+	log.Debug("open session with node ", node, " start")
+	defer log.Debug("open session with node ", node, " done")
+	var nodeOc *interactive.Oc
+	ocChan := make(chan *interactive.Oc)
+
+	goExpectSpawner := interactive.NewGoExpectSpawner()
+	var spawner interactive.Spawner = goExpectSpawner
+
+	go func() {
+		oc, outCh, err := interactive.SpawnNodeOc(&spawner, node, namespace, timeout, options...)
+		gomega.Expect(outCh).ToNot(gomega.BeNil())
+		gomega.Expect(err).To(gomega.BeNil())
+		// Set up a go routine which reads from the error channel
+		go func() {
+			for {
+				select {
+				case err := <-outCh:
+					log.Fatalf("OC session to node %s is broken due to: %v, aborting the test run", oc.GetPodName(), err)
+				case <-oc.GetDoneChannel():
+					log.Infof("OC session to node %s is closed, stop looking for errors", oc.GetPodName())
+					return
+				}
+			}
+		}()
+		ocChan <- oc
+	}()
+
+	nodeOc = <-ocChan
+
+	gomega.Expect(nodeOc).ToNot(gomega.BeNil())
+
+	return nodeOc
+}
+func (env *TestEnvironment) createNodes() map[string]*NodeConfig {
+	log.Debug("autodiscovery: create nodes  start")
+	defer log.Debug("autodiscovery: create nodes done")
+	nodes := make(map[string]*NodeConfig)
+	minikube, _ := strconv.ParseBool(os.Getenv("TNF_MINIKUBE_ONLY"))
+
+	for _, n := range env.Config.Nodes {
+		nodes[n.Name] = &NodeConfig{Node: n, Name: n.Name, Oc: nil, deployment: false}
+	}
+
+	for _, c := range env.ContainersUnderTest {
+		nodeName := c.ContainerConfiguration.NodeName
+		if _, ok := nodes[nodeName]; ok {
+			nodes[nodeName].deployment = true
+		} else {
+			log.Warn("node ", nodeName, " has deployment, but not the right labels")
+		}
+	}
+
+	if minikube {
+		return nodes
+	}
+	for _, n := range nodes {
+		oc := getOcNodeSession(n.Name, env.NameSpaceUnderTest, DefaultTimeout, interactive.Verbose(true), interactive.SendTimeout(DefaultTimeout))
+		nodes[n.Name].Oc = oc
+	}
+	time.Sleep(DefaultTimeout)
+	return nodes
 }
 
 // createContainers contains the general steps involved in creating "oc" sessions and other configuration. A map of the

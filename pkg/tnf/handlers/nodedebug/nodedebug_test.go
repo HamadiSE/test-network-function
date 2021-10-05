@@ -28,7 +28,7 @@ import (
 )
 
 func Test_NewNodeDebug(t *testing.T) {
-	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true)
+	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true, true)
 	assert.NotNil(t, newNd)
 	assert.Equal(t, testTimeoutDuration, newNd.Timeout())
 	assert.Equal(t, newNd.Result(), tnf.ERROR)
@@ -38,7 +38,7 @@ func Test_NewNodeDebug(t *testing.T) {
 }
 
 func Test_ReelFirstPositive(t *testing.T) {
-	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true)
+	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true, true)
 	assert.NotNil(t, newNd)
 	firstStep := newNd.ReelFirst()
 	re := regexp.MustCompile(firstStep.Expect[0])
@@ -48,7 +48,7 @@ func Test_ReelFirstPositive(t *testing.T) {
 }
 
 func Test_ReelFirstNegative(t *testing.T) {
-	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true)
+	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true, true)
 	assert.NotNil(t, newNd)
 	firstStep := newNd.ReelFirst()
 	re := regexp.MustCompile(firstStep.Expect[0])
@@ -57,7 +57,7 @@ func Test_ReelFirstNegative(t *testing.T) {
 }
 
 func Test_ReelMatch(t *testing.T) {
-	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true)
+	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true, true)
 	assert.NotNil(t, newNd)
 	step := newNd.ReelMatch("", "", testInputSuccess)
 	assert.Nil(t, step)
@@ -68,7 +68,7 @@ func Test_ReelMatch(t *testing.T) {
 
 // Just ensure there are no panics.
 func Test_ReelEof(t *testing.T) {
-	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true)
+	newNd := nd.NewNodeDebug(testTimeoutDuration, testNodeName, testCommand, true, true, true)
 	assert.NotNil(t, newNd)
 	newNd.ReelEOF()
 }

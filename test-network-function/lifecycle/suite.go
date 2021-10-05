@@ -19,7 +19,6 @@ package lifecycle
 import (
 	"fmt"
 	"path"
-	"sort"
 	"strings"
 	"time"
 
@@ -40,7 +39,6 @@ import (
 	"github.com/test-network-function/test-network-function/pkg/tnf"
 	dp "github.com/test-network-function/test-network-function/pkg/tnf/handlers/deployments"
 	dd "github.com/test-network-function/test-network-function/pkg/tnf/handlers/deploymentsdrain"
-	dn "github.com/test-network-function/test-network-function/pkg/tnf/handlers/deploymentsnodes"
 	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/graceperiod"
 	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/nodeselector"
 	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/owners"
@@ -167,7 +165,8 @@ func runScalingTest(deployment configsections.Deployment) {
 	handler := scaling.NewScaling(common.DefaultTimeout, deployment.Namespace, deployment.Name, deployment.Replicas)
 	test, err := tnf.NewTest(common.GetContext().GetExpecter(), handler, []reel.Handler{handler}, common.GetContext().GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())
-	test.RunAndValidate()
+	common.RunAndValidateTest(test)
+
 	// Wait until the deployment is ready
 	waitForAllDeploymentsReady(deployment.Namespace, scalingTimeout, scalingPollingPeriod)
 }
@@ -178,17 +177,17 @@ func testScaling(env *config.TestEnvironment) {
 		ginkgo.By("Testing deployment scaling")
 		defer results.RecordResult(identifiers.TestScalingIdentifier)
 		defer restoreDeployments(env)
+		defer env.SetNeedsRefresh()
 
 		if len(env.DeploymentsUnderTest) == 0 {
 			ginkgo.Skip("No test deployments found.")
 		}
-
+		common.TeardownNodeDebugSession()
 		for _, deployment := range env.DeploymentsUnderTest {
 			ginkgo.By(fmt.Sprintf("Scaling Deployment=%s, Replicas=%d (ns=%s)",
 				deployment.Name, deployment.Replicas, deployment.Namespace))
 
 			closeOcSessionsByDeployment(env.ContainersUnderTest, deployment)
-
 			replicaCount := deployment.Replicas
 
 			// ScaleIn, removing one pod from the replicaCount
@@ -198,9 +197,6 @@ func testScaling(env *config.TestEnvironment) {
 			// Scaleout, restoring the original replicaCount number
 			deployment.Replicas = replicaCount
 			runScalingTest(deployment)
-
-			// Ensure next tests/test suites receive a refreshed config.
-			env.SetNeedsRefresh()
 		}
 	})
 }
@@ -219,11 +215,13 @@ func testNodeSelector(env *config.TestEnvironment) {
 			tester := nodeselector.NewNodeSelector(common.DefaultTimeout, podName, podNamespace)
 			test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 			gomega.Expect(err).To(gomega.BeNil())
-			test.RunAndValidateWithFailureCallback(func() {
+			testResult, err := test.Run()
+			gomega.Expect(err).To(gomega.BeNil())
+			if testResult != tnf.SUCCESS {
 				msg := fmt.Sprintf("The pod specifies nodeSelector/nodeAffinity field, you might want to change it, %s %s", podNamespace, podName)
 				log.Warn(msg)
 				infoWriter(msg)
-			})
+			}
 		}
 	})
 }
@@ -242,7 +240,9 @@ func testGracePeriod(env *config.TestEnvironment) {
 			tester := graceperiod.NewGracePeriod(common.DefaultTimeout, podName, podNamespace)
 			test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 			gomega.Expect(err).To(gomega.BeNil())
-			test.RunAndValidate()
+			testResult, err := test.Run()
+			gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
+			gomega.Expect(err).To(gomega.BeNil())
 			gracePeriod := tester.GetGracePeriod()
 			if gracePeriod == defaultTerminationGracePeriod {
 				msg := fmt.Sprintf("%s %s has terminationGracePeriod set to %d, you might want to change it", podNamespace, podName, defaultTerminationGracePeriod)
@@ -273,18 +273,21 @@ func shutdownTest(podNamespace, podName string) {
 	values["POD_NAMESPACE"] = podNamespace
 	values["POD_NAME"] = podName
 	values["GO_TEMPLATE_PATH"] = relativeShutdownTestDirectoryPath
-	tester, handlers, result, err := generic.NewGenericFromMap(relativeShutdownTestPath, common.RelativeSchemaPath, values)
+	test, handlers, result, err := generic.NewGenericFromMap(relativeShutdownTestPath, common.RelativeSchemaPath, values)
 	gomega.Expect(err).To(gomega.BeNil())
 	gomega.Expect(result).ToNot(gomega.BeNil())
 	gomega.Expect(result.Valid()).To(gomega.BeTrue())
 	gomega.Expect(handlers).ToNot(gomega.BeNil())
 	gomega.Expect(handlers).ToNot(gomega.BeNil())
-	gomega.Expect(tester).ToNot(gomega.BeNil())
-	test, err := tnf.NewTest(context.GetExpecter(), *tester, handlers, context.GetErrorChannel())
-	gomega.Expect(err).To(gomega.BeNil())
 	gomega.Expect(test).ToNot(gomega.BeNil())
+	tester, err := tnf.NewTest(context.GetExpecter(), *test, handlers, context.GetErrorChannel())
+	gomega.Expect(err).To(gomega.BeNil())
+	gomega.Expect(tester).ToNot(gomega.BeNil())
 
-	test.RunAndValidate()
+	testResult, err := tester.Run()
+	gomega.Expect(err).To(gomega.BeNil())
+	gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
+	gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
 }
 
 func testPodsRecreation(env *config.TestEnvironment) {
@@ -293,8 +296,8 @@ func testPodsRecreation(env *config.TestEnvironment) {
 
 	testID := identifiers.XformToGinkgoItIdentifier(identifiers.TestPodRecreationIdentifier)
 	ginkgo.It(testID, func() {
-		env.SetNeedsRefresh()
 		ginkgo.By("Testing node draining effect of deployment")
+		defer results.RecordResult(identifiers.TestPodRecreationIdentifier)
 
 		ginkgo.By(fmt.Sprintf("test deployment in namespace %s", env.NameSpaceUnderTest))
 		deployments, notReadyDeployments = getDeployments(env.NameSpaceUnderTest)
@@ -305,52 +308,28 @@ func testPodsRecreation(env *config.TestEnvironment) {
 		if len(notReadyDeployments) != 0 {
 			ginkgo.Skip("Can not test when deployments are not ready")
 		}
-
-		ginkgo.By("Should return map of nodes to deployments")
-		nodesSorted := getDeploymentsNodes(env.NameSpaceUnderTest)
-
+		defer env.SetNeedsRefresh()
 		ginkgo.By("should create new replicas when node is drained")
-		defer results.RecordResult(identifiers.TestPodRecreationIdentifier)
-		for _, n := range nodesSorted {
-			closeOcSessionsByNode(env.ContainersUnderTest, n.name)
-			closeOcSessionsByNode(env.PartnerContainers, n.name)
+		common.TeardownNodeDebugSession()
+		for _, n := range env.NodesUnderTest {
+			if !n.HasDeployment() {
+				log.Debug("node ", n.Name, " has no deployment, skip draining")
+				continue
+			}
+			closeOcSessionsByNode(env.ContainersUnderTest, n.Name)
+			closeOcSessionsByNode(env.PartnerContainers, n.Name)
 			// drain node
-			drainNode(n.name) // should go in this
+			drainNode(n.Name) // should go in this
 			// verify deployments are ready again
 			_, notReadyDeployments = getDeployments(env.NameSpaceUnderTest)
 			if len(notReadyDeployments) != 0 {
-				uncordonNode(n.name)
-				ginkgo.Fail(fmt.Sprintf("did not create replicas when node %s is drained", n.name))
+				uncordonNode(n.Name)
+				ginkgo.Fail(fmt.Sprintf("did not create replicas when node %s is drained", n.Name))
 			}
 
-			uncordonNode(n.name)
+			uncordonNode(n.Name)
 		}
 	})
-}
-
-type node struct {
-	name        string
-	deployments map[string]bool
-}
-
-func sortNodesMap(nodesMap dn.NodesMap) []node {
-	nodes := make([]node, 0, len(nodesMap))
-	for n, d := range nodesMap {
-		nodes = append(nodes, node{n, d})
-	}
-	sort.Slice(nodes, func(i, j int) bool { return len(nodes[i].deployments) > len(nodes[j].deployments) })
-	return nodes
-}
-
-func getDeploymentsNodes(namespace string) []node {
-	context := common.GetContext()
-	tester := dn.NewDeploymentsNodes(common.DefaultTimeout, namespace)
-	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
-	gomega.Expect(err).To(gomega.BeNil())
-	test.RunAndValidate()
-	nodes := tester.GetNodes()
-	gomega.Expect(nodes).NotTo(gomega.BeEmpty())
-	return sortNodesMap(nodes)
 }
 
 // getDeployments returns map of deployments and names of not-ready deployments
@@ -359,7 +338,7 @@ func getDeployments(namespace string) (deployments dp.DeploymentMap, notReadyDep
 	tester := dp.NewDeployments(common.DefaultTimeout, namespace)
 	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())
-	test.RunAndValidate()
+	common.RunAndValidateTest(test)
 
 	deployments = tester.GetDeployments()
 
@@ -377,25 +356,28 @@ func drainNode(node string) {
 	tester := dd.NewDeploymentsDrain(drainTimeout, node)
 	test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 	gomega.Expect(err).To(gomega.BeNil())
-	test.RunAndValidate()
+	common.RunAndValidateTest(test)
 }
 
 func uncordonNode(node string) {
 	context := common.GetContext()
 	values := make(map[string]interface{})
 	values["NODE"] = node
-	tester, handlers, result, err := generic.NewGenericFromMap(relativeNodesTestPath, common.RelativeSchemaPath, values)
+	test, handlers, result, err := generic.NewGenericFromMap(relativeNodesTestPath, common.RelativeSchemaPath, values)
 	gomega.Expect(err).To(gomega.BeNil())
 	gomega.Expect(result).ToNot(gomega.BeNil())
 	gomega.Expect(result.Valid()).To(gomega.BeTrue())
 	gomega.Expect(handlers).ToNot(gomega.BeNil())
 	gomega.Expect(len(handlers)).To(gomega.Equal(1))
+	gomega.Expect(test).ToNot(gomega.BeNil())
+
+	tester, err := tnf.NewTest(context.GetExpecter(), *test, handlers, context.GetErrorChannel())
+	gomega.Expect(err).To(gomega.BeNil())
 	gomega.Expect(tester).ToNot(gomega.BeNil())
 
-	test, err := tnf.NewTest(context.GetExpecter(), *tester, handlers, context.GetErrorChannel())
+	testResult, err := tester.Run()
 	gomega.Expect(err).To(gomega.BeNil())
-	gomega.Expect(test).ToNot(gomega.BeNil())
-	test.RunAndValidate()
+	gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
 }
 
 // Pod antiaffinity test for all deployments
@@ -425,18 +407,19 @@ func podAntiAffinity(deployment, podNamespace string, replica int) {
 	values["DEPLOYMENT_NAME"] = deployment
 	values["DEPLOYMENT_NAMESPACE"] = podNamespace
 	infoWriter := tnf.CreateTestExtraInfoWriter()
-	tester, handlers, result, err := generic.NewGenericFromMap(relativePodTestPath, common.RelativeSchemaPath, values)
+	test, handlers, result, err := generic.NewGenericFromMap(relativePodTestPath, common.RelativeSchemaPath, values)
 	gomega.Expect(err).To(gomega.BeNil())
 	gomega.Expect(result).ToNot(gomega.BeNil())
 	gomega.Expect(result.Valid()).To(gomega.BeTrue())
 	gomega.Expect(handlers).ToNot(gomega.BeNil())
 	gomega.Expect(len(handlers)).To(gomega.Equal(1))
-	gomega.Expect(tester).ToNot(gomega.BeNil())
-	test, err := tnf.NewTest(context.GetExpecter(), *tester, handlers, context.GetErrorChannel())
-	gomega.Expect(err).To(gomega.BeNil())
 	gomega.Expect(test).ToNot(gomega.BeNil())
+	tester, err := tnf.NewTest(context.GetExpecter(), *test, handlers, context.GetErrorChannel())
+	gomega.Expect(err).To(gomega.BeNil())
+	gomega.Expect(tester).ToNot(gomega.BeNil())
 
-	test.RunAndValidateWithFailureCallback(func() {
+	testResult, err := tester.Run()
+	if testResult != tnf.SUCCESS {
 		if replica > 1 {
 			msg := fmt.Sprintf("The deployment replica count is %d, but a podAntiAffinity rule is not defined, "+
 				"you might want to change it in deployment %s in namespace %s", replica, deployment, podNamespace)
@@ -449,7 +432,9 @@ func podAntiAffinity(deployment, podNamespace string, replica int) {
 			log.Warn(msg)
 			infoWriter(msg)
 		}
-	})
+	}
+	gomega.Expect(err).To(gomega.BeNil())
+	gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
 }
 
 func testOwner(env *config.TestEnvironment) {
@@ -465,7 +450,9 @@ func testOwner(env *config.TestEnvironment) {
 			tester := owners.NewOwners(common.DefaultTimeout, podNamespace, podName)
 			test, err := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
 			gomega.Expect(err).To(gomega.BeNil())
-			test.RunAndValidate()
+			testResult, err := test.Run()
+			gomega.Expect(testResult).To(gomega.Equal(tnf.SUCCESS))
+			gomega.Expect(err).To(gomega.BeNil())
 		}
 	})
 }

@@ -44,6 +44,7 @@ func (node Node) IsWorker() bool {
 		if t == WorkerLabel {
 			return true
 		}
+		
 	}
 	return false
 }

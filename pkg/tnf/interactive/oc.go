@@ -17,9 +17,13 @@
 package interactive
 
 import (
+	"fmt"
+	"strings"
 	"time"
 
 	expect "github.com/google/goexpect"
+	"github.com/sirupsen/logrus"
+	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/common"
 )
 
 const (
@@ -29,13 +33,16 @@ const (
 	ocDefaultShell           = "sh"
 	ocExecCommand            = "exec"
 	ocNamespaceArg           = "-n"
-	ocInteractiveArg         = "-it"
+	ocInteractiveArg         = "-i"
+	ocNodeArg                = "node"
+	ocDebugArg               = "debug"
 )
 
 // Oc provides an OpenShift Client designed to wrap the "oc" CLI.
 type Oc struct {
-	// name of the pod
+	// id of the pod or the node
 	pod string
+	// node set to true means the sessions is node session
 	// name of the container
 	container string
 	// namespace of the pod
@@ -44,7 +51,7 @@ type Oc struct {
 	serviceAccountName string
 	// timeout for commands run in expecter
 	timeout time.Duration
-	// options for experter, such as expect.Verbose(true)
+	// options for expecter, such as expect.Verbose(true)
 	opts []Option
 	// the underlying subprocess implementation, tailored to OpenShift Client
 	expecter *expect.Expecter
@@ -64,7 +71,18 @@ func SpawnOc(spawner *Spawner, pod, container, namespace string, timeout time.Du
 		return nil, context.GetErrorChannel(), err
 	}
 	errorChannel := context.GetErrorChannel()
-	return &Oc{pod: pod, container: container, namespace: namespace, timeout: timeout, opts: opts, expecter: context.GetExpecter(), spawnErr: err, errorChannel: errorChannel, doneChannel: make(chan bool)}, errorChannel, nil
+	return &Oc{pod: pod, container: container, namespace: namespace, timeout: timeout, opts: opts, expecter: context.GetExpecter(), spawnErr: err, errorChannel: errorChannel, doneChannel: make(chan bool, 10)}, errorChannel, nil
+}
+
+func SpawnNodeOc(spawner *Spawner, node string, namespace string, timeout time.Duration, opts ...Option) (*Oc, <-chan error, error) {
+	ocArgs := []string{common.GetDebugCommand(), ocNamespaceArg, namespace, fmt.Sprintf("%s/%s", ocNodeArg, node)}
+	logrus.Info("spawn shell for node ", node, "using ", strings.Join(ocArgs, " "))
+	context, err := (*spawner).Spawn(ocCommand, ocArgs, timeout, opts...)
+	if err != nil {
+		return nil, context.GetErrorChannel(), err
+	}
+	errorChannel := context.GetErrorChannel()
+	return &Oc{pod: node, container: "container-00", namespace: namespace, timeout: timeout, opts: opts, expecter: context.GetExpecter(), spawnErr: err, errorChannel: errorChannel, doneChannel: make(chan bool, 10)}, errorChannel, nil
 }
 
 // GetExpecter returns a reference to the expect.Expecter reference used to control the OpenShift client.
@@ -114,10 +132,12 @@ func (o *Oc) GetErrorChannel() <-chan error {
 
 // GetDoneChannel returns the receive only done channel
 func (o *Oc) GetDoneChannel() <-chan bool {
+	logrus.Debugf("read done channel pod %s/%s %d", o.pod, o.container, len(o.doneChannel))
 	return o.doneChannel
 }
 
 // Close sends the signal to the done channel
 func (o *Oc) Close() {
+	logrus.Debugf("send close to channel pod %s/%s ", o.pod, o.container)
 	o.doneChannel <- true
 }

@@ -27,13 +27,13 @@ import (
 )
 
 func TestNewSysctlAllConfigsArgs(t *testing.T) {
-	newSysctlAllConfigsArgs := sysctlallconfigsargs.NewSysctlAllConfigsArgs(testTimeoutDuration, testNodeName)
+	newSysctlAllConfigsArgs := sysctlallconfigsargs.NewSysctlAllConfigsArgs(testTimeoutDuration)
 	assert.NotNil(t, newSysctlAllConfigsArgs)
 	assert.Equal(t, tnf.ERROR, newSysctlAllConfigsArgs.Result())
 }
 
 func Test_ReelFirst(t *testing.T) {
-	newSysctlAllConfigsArgs := sysctlallconfigsargs.NewSysctlAllConfigsArgs(testTimeoutDuration, testNodeName)
+	newSysctlAllConfigsArgs := sysctlallconfigsargs.NewSysctlAllConfigsArgs(testTimeoutDuration)
 	assert.NotNil(t, newSysctlAllConfigsArgs)
 	firstStep := newSysctlAllConfigsArgs.ReelFirst()
 	re := regexp.MustCompile(firstStep.Expect[0])
@@ -43,7 +43,7 @@ func Test_ReelFirst(t *testing.T) {
 }
 
 func Test_ReelMatch(t *testing.T) {
-	newSysctlAllConfigsArgs := sysctlallconfigsargs.NewSysctlAllConfigsArgs(testTimeoutDuration, testNodeName)
+	newSysctlAllConfigsArgs := sysctlallconfigsargs.NewSysctlAllConfigsArgs(testTimeoutDuration)
 	assert.NotNil(t, newSysctlAllConfigsArgs)
 	step := newSysctlAllConfigsArgs.ReelMatch("", "", testInput)
 	assert.Nil(t, step)
@@ -52,7 +52,7 @@ func Test_ReelMatch(t *testing.T) {
 
 // Just ensure there are no panics.
 func Test_ReelEof(t *testing.T) {
-	newSysctlAllConfigsArgs := sysctlallconfigsargs.NewSysctlAllConfigsArgs(testTimeoutDuration, testNodeName)
+	newSysctlAllConfigsArgs := sysctlallconfigsargs.NewSysctlAllConfigsArgs(testTimeoutDuration)
 	assert.NotNil(t, newSysctlAllConfigsArgs)
 	newSysctlAllConfigsArgs.ReelEOF()
 }
