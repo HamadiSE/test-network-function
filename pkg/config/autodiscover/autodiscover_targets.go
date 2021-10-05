@@ -17,10 +17,13 @@
 package autodiscover
 
 import (
+	"time"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/test-network-function/test-network-function/pkg/config/configsections"
 	"github.com/test-network-function/test-network-function/pkg/tnf"
 	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/nodenames"
+	"github.com/test-network-function/test-network-function/pkg/tnf/interactive"
 	"github.com/test-network-function/test-network-function/pkg/tnf/reel"
 	"github.com/test-network-function/test-network-function/pkg/tnf/testcases"
 	"github.com/test-network-function/test-network-function/test-network-function/common"
@@ -29,6 +32,7 @@ import (
 const (
 	operatorLabelName          = "operator"
 	skipConnectivityTestsLabel = "skip_connectivity_tests"
+	DefaultTimeout             = 10 * time.Second
 )
 
 var (
@@ -77,10 +81,14 @@ func FindTestTarget(labels []configsections.Label, target *configsections.TestTa
 func GetNodesList() (nodes map[string]configsections.Node) {
 	nodes = make(map[string]configsections.Node)
 	var nodeNames []string
-	context := common.GetContext()
+	context, err := interactive.SpawnShell(interactive.CreateGoExpectSpawner(), DefaultTimeout, interactive.Verbose(true), interactive.SendTimeout(DefaultTimeout))
+	if err != nil {
+		log.Error("Unable to get context ", ". Error: ", err)
+		return
+	}
 	tester := nodenames.NewNodeNames(common.DefaultTimeout, map[string]*string{configsections.MasterLabel: nil})
 	test, _ := tnf.NewTest(context.GetExpecter(), tester, []reel.Handler{tester}, context.GetErrorChannel())
-	_, err := test.Run()
+	_, err = test.Run()
 	if err != nil {
 		log.Error("Unable to get node list ", ". Error: ", err)
 		return
