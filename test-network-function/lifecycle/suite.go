@@ -24,6 +24,7 @@ import (
 
 	"github.com/test-network-function/test-network-function/pkg/config"
 	"github.com/test-network-function/test-network-function/pkg/config/configsections"
+	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/liveness"
 	"github.com/test-network-function/test-network-function/pkg/tnf/handlers/scaling"
 	"github.com/test-network-function/test-network-function/pkg/tnf/testcases"
 	"github.com/test-network-function/test-network-function/pkg/utils"
@@ -115,6 +116,8 @@ var _ = ginkgo.Describe(common.LifecycleTestKey, func() {
 			testScaling(env)
 			testStateFulSetScaling(env)
 		}
+
+		testLiveness(env)
 
 		testOwner(env)
 	}
@@ -595,5 +598,26 @@ func testImagePolicy(env *config.TestEnvironment) {
 			log.Debugf("Pods with incorrect image pull policy: %+v", failedPods)
 			ginkgo.Fail(fmt.Sprintf("%d pods have incorrect image pull policy.", n))
 		}
+	})
+}
+
+func testLiveness(env *config.TestEnvironment) {
+	ginkgo.It("liveness-test", func() {
+		badContainers := make([]configsections.ContainerIdentifier, len(env.ContainersUnderTest))
+		for cut, _ := range env.ContainersUnderTest {
+			cutName := cut.ContainerName
+			podName := cut.PodName
+			ns := cut.Namespace
+			test := liveness.NewLiveness(ns, podName, cutName, common.DefaultTimeout)
+			test.RunTest()
+			if test.Result != tnf.SUCCESS {
+				badContainers = append(badContainers, cut)
+			}
+		}
+		if len(badContainers) > 0 {
+			tnf.ClaimFilePrintf("containers with liveness not defined ", badContainers)
+			log.Error("containers with liveness not defined ", badContainers)
+		}
+		gomega.Expect(len(badContainers)).To(gomega.Equal(0))
 	})
 }

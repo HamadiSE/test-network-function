@@ -24,6 +24,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/test-network-function/test-network-function/internal/ocpclient"
 	"github.com/test-network-function/test-network-function/test-network-function/results"
 
 	"github.com/onsi/ginkgo"
@@ -147,6 +148,9 @@ func TestTest(t *testing.T) {
 	claimData := claimRoot.Claim
 	claimData.Configurations = make(map[string]interface{})
 	claimData.Nodes = make(map[string]interface{})
+
+	// initiate connection with the cluster
+	ocpclient.NewOcpClient()
 
 	// run the test suite
 	ginkgo.RunSpecs(t, CnfCertificationTestSuiteName)
