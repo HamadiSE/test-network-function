@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/sirupsen/logrus"
+	"github.com/test-network-function/test-network-function/test-network-function/common"
 	corev1client "k8s.io/client-go/kubernetes/typed/core/v1"
 	"k8s.io/client-go/tools/clientcmd"
 )
@@ -71,6 +72,7 @@ func NewOcpClient(filenames ...string) {
 	if err != nil {
 		panic(err)
 	}
+	restconfig.Timeout = common.DefaultTimeout
 	ocpClient.Coreclient, err = corev1client.NewForConfig(restconfig)
 	if err != nil {
 		logrus.Panic("can't instantiate corev1client", err)

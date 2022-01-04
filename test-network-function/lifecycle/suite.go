@@ -611,6 +611,7 @@ func testLiveness(env *config.TestEnvironment) {
 			test := liveness.NewLiveness(ns, podName, cutName, common.DefaultTimeout)
 			test.RunTest()
 			if test.Result != tnf.SUCCESS {
+				log.Errorf("container %s:%s-%s has liveness not defined", ns, podName, cutName)
 				badContainers = append(badContainers, cut)
 			}
 		}
