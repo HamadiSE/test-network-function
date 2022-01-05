@@ -15,7 +15,7 @@ type OcpClient struct {
 	ready      bool
 }
 
-var ocpClient OcpClient = OcpClient{}
+var ocpClient = OcpClient{}
 
 func GetOcpClient() *OcpClient {
 	NewOcpClient()
@@ -43,7 +43,7 @@ func NewOcpClient(filenames ...string) {
 
 	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
 
-	precedence := make([]string, 3)
+	precedence := []string{}
 	if len(filenames) > 0 {
 		precedence = append(precedence, filenames...)
 	}
@@ -60,7 +60,6 @@ func NewOcpClient(filenames ...string) {
 	loadingRules.Precedence = precedence
 
 	configOverrides := &clientcmd.ConfigOverrides{}
-	//configOverrides
 
 	kubeconfig := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(
 		loadingRules,
@@ -77,5 +76,4 @@ func NewOcpClient(filenames ...string) {
 	if err != nil {
 		logrus.Panic("can't instantiate corev1client", err)
 	}
-	return
 }

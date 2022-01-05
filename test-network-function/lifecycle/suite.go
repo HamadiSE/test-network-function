@@ -603,7 +603,7 @@ func testImagePolicy(env *config.TestEnvironment) {
 
 func testLiveness(env *config.TestEnvironment) {
 	ginkgo.It("liveness-test", func() {
-		badContainers := make([]configsections.ContainerIdentifier, 0)
+		badContainers := []configsections.ContainerIdentifier{}
 		for cut, _ := range env.ContainersUnderTest {
 			cutName := cut.ContainerName
 			podName := cut.PodName
