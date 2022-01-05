@@ -228,6 +228,10 @@ var (
 		Url:     formTestURL(common.DiagnosticTestKey, "clusterversion"),
 		Version: versionOne,
 	}
+	TestLivenessProbeIdentifier = claim.Identifier{
+		Url:     formTestURL(common.LifecycleTestKey, "liveness"),
+		Version: versionOne,
+	}
 )
 
 func formDescription(identifier claim.Identifier, description string) string {
@@ -626,5 +630,12 @@ the changes for you.`,
 		Description: formDescription(TestPodAutomountServiceAccountIdentifier,
 			`check that all pods under test have automountServiceAccountToken set to false`),
 		Remediation: `check that pod has automountServiceAccountToken set to false or pod is attached to service account which has automountServiceAccountToken set to false`,
+	},
+	TestLivenessProbeIdentifier: {
+		Identifier: TestLivenessProbeIdentifier,
+		Type:       normativeResult,
+		Description: formDescription(TestLivenessProbeIdentifier, `check that all containers under test
+		have liveness probe defined`),
+		Remediation: `add liveness probe to deployed containers`,
 	},
 }

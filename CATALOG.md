@@ -132,6 +132,15 @@ Description|http://test-network-function.com/testcases/lifecycle/image-pull-poli
 Result Type|normative
 Suggested Remediation|Ensure that the containers under test are using IfNotPresent as Image Pull Policy.
 Best Practice Reference|https://docs.google.com/document/d/1wRHMk1ZYUSVmgp_4kxvqjVOKwolsZ5hDXjr5MLy-wbg/edit#  Section 15.6
+### http://test-network-function.com/testcases/lifecycle/liveness
+
+Property|Description
+---|---
+Version|v1.0.0
+Description|http://test-network-function.com/testcases/lifecycle/liveness check that all containers under test 		have liveness probe defined
+Result Type|normative
+Suggested Remediation|add liveness probe to deployed containers
+Best Practice Reference|
 ### http://test-network-function.com/testcases/lifecycle/pod-high-availability
 
 Property|Description

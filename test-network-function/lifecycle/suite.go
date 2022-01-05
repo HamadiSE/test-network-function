@@ -602,7 +602,8 @@ func testImagePolicy(env *config.TestEnvironment) {
 }
 
 func testLiveness(env *config.TestEnvironment) {
-	ginkgo.It("liveness-test", func() {
+	testID := identifiers.XformToGinkgoItIdentifier(identifiers.TestLivenessProbeIdentifier)
+	ginkgo.It(testID, func() {
 		badContainers := []configsections.ContainerIdentifier{}
 		for cut, _ := range env.ContainersUnderTest {
 			cutName := cut.ContainerName
