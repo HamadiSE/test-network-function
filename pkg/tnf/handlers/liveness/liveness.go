@@ -43,7 +43,7 @@ func (l *Liveness) RunTest() {
 		l.Result = tnf.ERROR
 		return
 	}
-	for i, _ := range pod.Spec.Containers {
+	for i := 0; i < len(pod.Spec.Containers); i++ {
 		cut := pod.Spec.Containers[i]
 		fmt.Println("Debug ", cut.LivenessProbe)
 		if cut.Name == l.containerName {
