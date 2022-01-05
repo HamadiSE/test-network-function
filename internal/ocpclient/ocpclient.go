@@ -34,8 +34,8 @@ func getKubeConfig() (config string) {
 	return
 }
 
+// NewOcpClient instantiate ocp client
 func NewOcpClient(filenames ...string) {
-
 	if ocpClient.ready {
 		return
 	}
