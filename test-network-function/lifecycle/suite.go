@@ -605,7 +605,7 @@ func testLiveness(env *config.TestEnvironment) {
 	testID := identifiers.XformToGinkgoItIdentifier(identifiers.TestLivenessProbeIdentifier)
 	ginkgo.It(testID, func() {
 		badContainers := []configsections.ContainerIdentifier{}
-		for cut, _ := range env.ContainersUnderTest {
+		for cut := range env.ContainersUnderTest {
 			cutName := cut.ContainerName
 			podName := cut.PodName
 			ns := cut.Namespace

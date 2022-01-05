@@ -22,16 +22,16 @@ func GetOcpClient() *OcpClient {
 	return &ocpClient
 }
 
-func getDefaultPath() (path string) {
+func getDefaultPath() string {
+	path := ""
 	home := os.Getenv("HOME")
 	if home != "" {
 		path = filepath.Join(home, ".kube", "config")
 	}
-	return
+	return path
 }
-func getKubeConfig() (config string) {
-	config = os.Getenv("KUBECONFIG")
-	return
+func getKubeConfig() string {
+	return os.Getenv("KUBECONFIG")
 }
 
 // NewOcpClient instantiate ocp client
